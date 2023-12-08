@@ -7,6 +7,7 @@ import { v4 } from 'uuid';
 import { useAppDispatch } from '@/hooks';
 import { Provider } from 'react-redux';
 import { store } from './store';
+
 const CanvaComponents = dynamic(() => import('./components/CanvaComponents'), {
   ssr: false,
 });
@@ -19,6 +20,21 @@ const TextComponent = dynamic(() => import('./components/TextComponent'), {
 const CircleComponent = dynamic(() => import('./components/CircleComponent'), {
   ssr: false,
 });
+
+
+
+
+import Konva from 'react-konva';
+
+const DynamicLayer = dynamic(() => Promise.resolve(Konva.Layer), {
+  ssr: false,
+});
+
+const DynamicStage = dynamic(() => Promise.resolve(Konva.Stage), {
+  ssr: false,
+});
+
+
 
 import { useAppSelector } from '@/hooks';
 import {addRectangle,addText,addBigText,addCircle} from "../features/canva/rectangle-slice"
@@ -84,15 +100,15 @@ export default function Home() {
         <ModifySelectedComponent/>
       </div>
       <section className='w-full flex  bg-slate-100 p-10  items-center justify-center border-2 b '>
-    <Stage  width={700}   className="bg-white"
+    <DynamicStage  width={700}   className="bg-white"
       height={700}
      onClick={()=>dispatch(unselectId())} >
-      <Layer  
+      <DynamicLayer  
        width={window.innerWidth}
       height={window.innerHeight} >
       {...allTransComponent}
-      </Layer>
-    </Stage>
+      </DynamicLayer>
+    </DynamicStage>
     </section>
     </main>
     </Provider>
