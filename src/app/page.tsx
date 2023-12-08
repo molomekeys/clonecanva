@@ -1,16 +1,14 @@
 "use client"
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
-import { Layer, Stage } from 'react-konva';
+
 import { useState } from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch } from '@/hooks';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-const CanvaComponents = dynamic(() => import('./components/CanvaComponents'), {
-  ssr: false,
-});
+
 const TransComponent = dynamic(() => import('./components/TransComponent'), {
   ssr: false,
 });
@@ -27,15 +25,13 @@ const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
 
 
 
-import Konva from 'react-konva';
 
 
 
 
 
 import { useAppSelector } from '@/hooks';
-import {addRectangle,addText,addBigText,addCircle} from "../features/canva/rectangle-slice"
-import {setSelectedId,unselectId} from "../features/canva/selectedCanva-slice" 
+import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
 export default function Home() {
   const dispatch=useAppDispatch()
