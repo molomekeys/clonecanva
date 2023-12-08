@@ -26,13 +26,7 @@ const CircleComponent = dynamic(() => import('./components/CircleComponent'), {
 
 import Konva from 'react-konva';
 
-const DynamicLayer = dynamic(() => Promise.resolve(Konva.Layer), {
-  ssr: false,
-});
 
-const DynamicStage = dynamic(() => Promise.resolve(Konva.Stage), {
-  ssr: false,
-});
 
 
 
@@ -100,15 +94,15 @@ export default function Home() {
         <ModifySelectedComponent/>
       </div>
       <section className='w-full flex  bg-slate-100 p-10  items-center justify-center border-2 b '>
-    <DynamicStage  width={700}   className="bg-white"
+    <Stage  width={700}   className="bg-white"
       height={700}
      onClick={()=>dispatch(unselectId())} >
-      <DynamicLayer  
+      <Layer  
        width={window.innerWidth}
       height={window.innerHeight} >
       {...allTransComponent}
-      </DynamicLayer>
-    </DynamicStage>
+      </Layer>
+    </Stage>
     </section>
     </main>
     </Provider>
