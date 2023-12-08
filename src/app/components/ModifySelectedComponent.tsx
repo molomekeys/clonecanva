@@ -1,3 +1,4 @@
+"use client"
 import { useAppSelector,useAppDispatch } from "@/hooks"
 import { useDispatch } from "react-redux"
 import { BlockPicker,GithubPicker,TwitterPicker } from 'react-color';
