@@ -6,10 +6,10 @@ import {unselectId} from "../../features/canva/selectedCanva-slice"
 const CanvaCom = ({children}:{children:React.ReactNode}) => {
     const dispatch=useAppDispatch()
   return (
-   <Stage  onMouseDown={()=>dispatch(unselectId())}
-   nMouseUp={()=>dispatch(unselectId())}
+   <Stage   onClick={()=>dispatch(unselectId())} className='bg-white'
    height={800} width={800} >
-    <Layer>
+    <Layer  
+   >
         {children}
     </Layer>
    </Stage>

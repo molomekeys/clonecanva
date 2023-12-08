@@ -20,7 +20,7 @@ const dispatch=useDispatch()
   })
   console.log(filteredId)
   return (
-    <div className="  h-fit py-6 px-4  w-full gap-20 bg-slate-white flex text-slate-800">
+    <div className="  fixed bg-slate-50 h-fit py-6 px-4  w-full gap-20  z-20 flex text-slate-800">
        
        <div className="flex gap-4 items-center justify-center">
        <p>undo</p>
