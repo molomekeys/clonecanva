@@ -21,6 +21,9 @@ const CircleComponent = dynamic(() => import('./components/CircleComponent'), {
   ssr: false,
 });
 
+const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
+  ssr: false,
+});
 
 
 
@@ -94,15 +97,9 @@ export default function Home() {
         <ModifySelectedComponent/>
       </div>
       <section className='w-full flex  bg-slate-100 p-10  items-center justify-center border-2 b '>
-    <Stage  width={700}   className="bg-white"
-      height={700}
-     onClick={()=>dispatch(unselectId())} >
-      <Layer  
-       width={window.innerWidth}
-      height={window.innerHeight} >
+ <CanvaCom>
       {...allTransComponent}
-      </Layer>
-    </Stage>
+      </CanvaCom>
     </section>
     </main>
     </Provider>
