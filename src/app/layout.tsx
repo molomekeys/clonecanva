@@ -1,6 +1,11 @@
+
+import { ReduxProvider } from '@/features/ReduxProvider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Provider } from 'react-redux'
+import MenuComponents from './components/MenuComponents'
 import './globals.css'
+import { store } from './store' 
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +21,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReduxProvider>
+         <section className='flex '>
+          <section className='w-1/5'>
+          <MenuComponents/>
+          </section>
+          <section className='w-4/5'>
+          {children}
+          </section>
+       
+        </section>
+        </ReduxProvider>
+        </body>
     </html>
   )
 }
