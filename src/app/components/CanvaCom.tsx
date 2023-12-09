@@ -6,13 +6,16 @@ import {unselectId} from "../../features/canva/selectedCanva-slice"
 const CanvaCom = ({children}:{children:React.ReactNode}) => {
     const dispatch=useAppDispatch()
   return (
-   <Stage   onClick={()=>dispatch(unselectId())} className='bg-white'
-   height={800} width={800} >
-    <Layer  
+    <div className='flex flex-col  w-full items-center justify-center'>
+   <Stage    scale={{x:1,y:1}}
+    onClick={()=>dispatch(unselectId())} className='bg-slate-50'
+   height={700} width={700} >
+    <Layer     
    >
         {children}
     </Layer>
    </Stage>
+   </div>
   )
 }
 export default CanvaCom

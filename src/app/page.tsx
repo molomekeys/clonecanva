@@ -85,14 +85,15 @@ export default function Home() {
   console.log(infoOfSelected)
   return (
     <Provider store={store}>
-    <main className="flex min-h-screen w-full
-     flex-col items-center justify-between ">
+    <main className="flex  w-full bg-slate-200
+     flex-col items-center justify-between gap-4 ">
       
       
-      <div className='w-full'>
+      <div className='w-full gap-8'>
         <ModifySelectedComponent/>
       </div>
-      <section className='w-full flex  bg-slate-100 p-10  items-center justify-center border-2 b '>
+      <section className='w-full flex 
+       bg-slate-200  items-center justify-center  '>
  <CanvaCom>
       {...allTransComponent}
       </CanvaCom>

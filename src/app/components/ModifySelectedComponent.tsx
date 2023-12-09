@@ -2,8 +2,10 @@
 import { useAppSelector,useAppDispatch } from "@/hooks"
 import { useDispatch } from "react-redux"
 import { BlockPicker,GithubPicker,TwitterPicker } from 'react-color';
+import { MdOutlineFormatColorText } from "react-icons/md";
 
 import {changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
+import { openColorMenu } from "@/features/canva/menu-slice";
 const ModifySelectedComponent = () => {
 
     const selecTedId=useAppSelector(state=>state.selectedCanva)
@@ -20,13 +22,15 @@ const dispatch=useDispatch()
   })
   console.log(filteredId)
   return (
-    <div className="  fixed bg-slate-50 h-fit py-6 px-4  w-full gap-20  z-20 flex text-slate-800">
+    <div className="   bg-slate-50 h-fit py-4 px-4  w-full gap-20  z-20 flex text-slate-800">
        
        <div className="flex gap-4 items-center justify-center">
        <p>undo</p>
         <p>do</p>
        </div>
-      {selecTedId.length>1&&  <div className="flex justify-between items-center w-full">
+      {selecTedId.length>1&&  
+      //ceci c'est pour garantir que un element à ete selectionner
+      <div className="flex justify-between items-center w-full">
      {filteredId[0].typeOfShape==="text"&&   
      <div className="flex gap-8 items-center justify-center">
      <div className="flex w-22">
@@ -56,12 +60,10 @@ const dispatch=useDispatch()
         
         </div>
         }
-        <div className="m-4">
-        <GithubPicker onChangeComplete={(colorSelected)=>{
-        dispatch(changeColor({color:colorSelected.hex,idSelected:selecTedId}))
-
-       }}
-        color={filteredId[0]?.color}/>
+        <div className="" onClick={()=>{
+            dispatch(openColorMenu())
+        }}>
+        <MdOutlineFormatColorText size={20}/>
             </div>
         <div className="flex items-center justify-between w-full gap-20">
       

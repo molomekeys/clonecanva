@@ -31,15 +31,15 @@ const rectangleSlice=createSlice({
     name:"rectangle",initialState:initialState,
     reducers:{
         addRectangle:(state)=>{
-            return [...state,{id:v4(),color:"#05a206",height:50,width:50,x:100,y:200,typeOfShape:"rectangle"}]
+            return [...state,{id:v4(),color:"#05a206",height:50,width:50,x:400,y:400,typeOfShape:"rectangle"}]
         },
         addText:(state)=>{
             return [...state,{id:v4(),color:"#000",height:20,width:20
-            ,x:100,y:200,typeOfShape:"text",fontSize:20}]
+            ,y:400,x:400,typeOfShape:"text",fontSize:20}]
         },
         addBigText:(state)=>{
             return [...state,{id:v4(),color:"#000",height:20,width:20
-            ,x:100,y:200,typeOfShape:"text",fontSize:20}]
+            ,x:100,y:200,typeOfShape:"text",fontSize:30}]
         },
         addBoldText:(state)=>{
             return [...state,{id:v4(),color:"#000",height:20,width:20
@@ -135,5 +135,7 @@ const rectangleSlice=createSlice({
         }}
 
     })
-export const {changeTextNormal,changeColor,specifiqueTextSize,increaseTextSize,decreaseTextSize,changeTextBold,addRectangle,addText,addBoldText,addBigText,addCircle}=rectangleSlice.actions
+export const {changeTextNormal,changeColor,specifiqueTextSize,
+    increaseTextSize,decreaseTextSize,changeTextBold,addRectangle,
+    addText,addBoldText,addBigText,addCircle}=rectangleSlice.actions
 export default rectangleSlice.reducer
