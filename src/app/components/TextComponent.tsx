@@ -8,9 +8,10 @@ interface RectangleProps{
     x:number,heigth:number,width:number,y:number
     fontSize?:number
     fontStyle?:string
+    text?:string
    
 }
-const TextComponent = ({isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fontStyle="500"}:RectangleProps) => {
+const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fontStyle="500"}:RectangleProps) => {
     
     const trRef=useRef<Konva.Transformer>(null)
     const textRef=useRef(null)
@@ -29,14 +30,24 @@ const TextComponent = ({isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fon
         }
 
     },[isSelect])
+    const [isChangedText,setIsChangedText]=useState(false)
   
   return (
    <>
-    <Text  onDblTap={onSelect}  fontStyle={fontStyle}
-     ref={textRef} x={x} y={y}  text={"This is a demo "} fontSize={fontSize}
-     onDblClick={onSelect} fill={color} draggable/>
-
-{isSelect&&  textRef.current&&  <Transformer flipEnabled={false} ref={trRef}/>}
+  
+ 
+ 
+    <Text   onClick={(e)=>{
+        e.cancelBubble=true
+        onSelect()
+    }}
+ fontStyle={fontStyle} listening
+     ref={textRef} x={x} y={y}  text={text} fontSize={fontSize}
+   
+    
+     fill={color} draggable/>
+{isSelect&&  textRef.current&&  
+<Transformer flipEnabled={false} ref={trRef}/>}
 
 
 

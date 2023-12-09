@@ -22,7 +22,7 @@ const MenuComponents = () => {
   console.log(allValues)
   console.log(selecTedId)
   const filteredId=allValues.filter((e)=>{
-  if (e.id===selecTedId)
+  if (e?.id===selecTedId)
   {
     return e
   }
@@ -32,7 +32,7 @@ const MenuComponents = () => {
   return (
     <section className="flex w-full h-full ">
 <div className={`flex flex-col text-slate-50 bg-slate-900 
-   ${valueMenu.isOpen||valueMenu.isColor? "w-fit " : "w-full "} `}>
+   ${(valueMenu.isOpen===true||valueMenu.isColor===true)? "w-fit " : "w-full "} `}>
    
 
 
@@ -76,9 +76,11 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
     </button>}
 
 
-    {valueMenu.typeMenu==="element"&&<ShapeMenuElement/>}
-    {valueMenu.typeMenu==="text"&&<TextMenuElement/>}
-    {(valueMenu.isColor&&ValueSelected.length>1)&&
+    {(valueMenu.typeMenu==="element"&&valueMenu.isOpen===true)&&<ShapeMenuElement/>}
+    {(valueMenu.typeMenu==="text"&&valueMenu.isOpen===true)&&<TextMenuElement/>}
+
+    
+    {(valueMenu.isColor&&ValueSelected.length>3)&&
     <div className="absolute gap-4  bg-slate-50 w-full 
     h-full z-20 flex flex-col items-center justify-center">
        
@@ -91,7 +93,7 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
         dispatch(changeColor({color:e.hex,idSelected:ValueSelected}))
        }}
        color={filteredId[0]?.color}/>
-       <SketchPicker  onChangeComplete={(e)=>{
+       <SketchPicker  onChange={(e)=>{
         dispatch(changeColor({color:e.hex,idSelected:ValueSelected}))
        }}
         color={filteredId[0]?.color}/>

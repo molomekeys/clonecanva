@@ -8,7 +8,7 @@ import { useAppDispatch } from '@/hooks';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-
+import { motion } from 'framer-motion';
 const TransComponent = dynamic(() => import('./components/TransComponent'), {
   ssr: false,
 });
@@ -38,11 +38,14 @@ export default function Home() {
  const idSelected=useAppSelector((state)=>state.selectedCanva)
   const allRectangle=useAppSelector((state)=>state.rectangle)
 
-  const rectangles=[{
-   
+  const filteredId=allRectangle.filter((e)=>{
+    if (e.id===idSelected)
+    {
+      return e
+    }
+      
+    })
 
-  },{}]
-  console.log(allRectangle)
   
   const allTransComponent=allRectangle.map((e,i)=>{
 
@@ -59,7 +62,8 @@ export default function Home() {
     />
     break;
     case "text" :
-    return <TextComponent heigth={e.height} width={e.width}
+    return <TextComponent  text={e.text}
+    heigth={e.height} width={e.width}
      color={e.color} x={e.x} fontStyle={e.fontFamily}
     y={e.y} isSelect={e.id===idSelected}
     onSelect={()=>dispatch(setSelectedId(e.id))} 
@@ -93,7 +97,15 @@ export default function Home() {
         <ModifySelectedComponent/>
       </div>
       <section className='w-full flex 
-       bg-slate-200  items-center justify-center  '>
+       bg-slate-200  items-center justify-center relative  '>
+      {filteredId[0]?.typeOfShape==="text"&& 
+           <div className='absolute bg-black z-40 '>
+ 
+  <motion.textarea   value={filteredId[0].text&&filteredId[0].text}
+  
+  className=' bg-slate-300 text-slate-50 z-20 inset-0
+    '> </motion.textarea>
+    </div>}
  <CanvaCom>
       {...allTransComponent}
       </CanvaCom>

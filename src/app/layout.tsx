@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-         <section className='flex  w-screen h-screen'>
+         <section className='flex  w-screen h-screen relative'>
           <section className={``}>
           <MenuComponents/>
           </section>

@@ -148,6 +148,7 @@ const trRef=useRef(null)
     <input placeholder='add text' className='w-48' onChange={(e)=>{
         setIsInputData(e.target.value)
     }}/>
+  
    <Stage ref={CanvaRef} onClick={()=>setIsSelectedText(false)}
     width={window.innerWidth} height={window.innerHeight}>
       <Layer   >

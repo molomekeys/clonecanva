@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { BlockPicker,GithubPicker,TwitterPicker } from 'react-color';
 import { MdOutlineFormatColorText } from "react-icons/md";
 
-import {changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
+import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
 import { openColorMenu } from "@/features/canva/menu-slice";
 const ModifySelectedComponent = () => {
 
@@ -27,6 +27,12 @@ const dispatch=useDispatch()
        <div className="flex gap-4 items-center justify-center">
        <p>undo</p>
         <p>do</p>
+        <p onClick={()=>{
+        dispatch(increaseIndex(selecTedId))
+     }}>Avancer</p>
+       <p onClick={()=>{
+        dispatch(decreaseIndex(selecTedId))
+     }} className="whitespace-nowrap">Reculer</p>
        </div>
       {selecTedId.length>1&&  
       //ceci c'est pour garantir que un element à ete selectionner
@@ -67,7 +73,7 @@ const dispatch=useDispatch()
             </div>
         <div className="flex items-center justify-between w-full gap-20">
       
-     
+  
         <p>{filteredId[0]?.x}</p>
         <p>{filteredId[0]?.y}</p>
         <p>{filteredId[0]?.fontFamily}</p>

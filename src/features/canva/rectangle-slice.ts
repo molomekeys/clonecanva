@@ -11,6 +11,7 @@ fontSize?:number
 radius?:number
 id:string
 fontFamily?:string
+text?:string
 }
 const initialState:RectangleSlice[]=[{
     color:"#b2a102",x:300,y:200,height:300,width:100,typeOfShape:"rectangle",id:v4()
@@ -34,15 +35,15 @@ const rectangleSlice=createSlice({
             return [...state,{id:v4(),color:"#05a206",height:50,width:50,x:400,y:400,typeOfShape:"rectangle"}]
         },
         addText:(state)=>{
-            return [...state,{id:v4(),color:"#000",height:20,width:20
+            return [...state,{id:v4(),text:"hello bro ",color:"#000",height:20,width:20
             ,y:400,x:400,typeOfShape:"text",fontSize:20}]
         },
         addBigText:(state)=>{
-            return [...state,{id:v4(),color:"#000",height:20,width:20
+            return [...state,{id:v4(),text:"hello bro ",color:"#000",height:20,width:20
             ,x:100,y:200,typeOfShape:"text",fontSize:30}]
         },
         addBoldText:(state)=>{
-            return [...state,{id:v4(),color:"#000",height:20,width:20
+            return [...state,{id:v4(),text:"hello bro ",color:"#000",height:20,width:20
             ,x:100,y:200,typeOfShape:"text",fontSize:20,fontFamily:"bold"}]
         },
         addCircle:(state)=>{
@@ -132,10 +133,44 @@ const rectangleSlice=createSlice({
             })
             return [...filteredText]
            
-        }}
+        },increaseIndex:(state,action:PayloadAction<string>)=>{
+            const indexId=state.findIndex(e=>e.id===action.payload)
+            const maxLength=state.length
+            if(maxLength===indexId)
+            {
+                return [...state]
+            }
+            else {
+                let newArray=[...state ]
+                newArray[indexId]=state[indexId+1]
+                newArray[indexId+1]=state[indexId]
+                return newArray
+            }
 
-    })
-export const {changeTextNormal,changeColor,specifiqueTextSize,
+          
+           
+        },decreaseIndex:(state,action:PayloadAction<string>)=>{
+            const indexId=state.findIndex(e=>e.id===action.payload)
+           
+            if(0===indexId)
+            {
+                return [...state]
+            }
+            else {
+                let newArray=[...state ]
+                newArray[indexId-1]=state[indexId]
+                newArray[indexId]=state[indexId+1]
+                return newArray
+            }
+
+          
+           
+        }
+
+    }
+
+})
+export const {decreaseIndex,changeTextNormal,increaseIndex,changeColor,specifiqueTextSize,
     increaseTextSize,decreaseTextSize,changeTextBold,addRectangle,
     addText,addBoldText,addBigText,addCircle}=rectangleSlice.actions
 export default rectangleSlice.reducer
