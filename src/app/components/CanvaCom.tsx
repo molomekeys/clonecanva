@@ -1,16 +1,24 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useAppDispatch } from '@/hooks';
 import {unselectId} from "../../features/canva/selectedCanva-slice"
 import {closeColorMenu} from "../../features/canva/menu-slice"
 import TextEditorComponent from './TextEditorComponent';
+import CanvaRichTextImage from './CanvaRichTextImage';
 const CanvaCom = ({children}:{children:React.ReactNode}) => {
     const dispatch=useAppDispatch()
+
+const [isImage,setIsImage]=useState("")
+function updateImage(e:string)
+{
+  setIsImage(e)
+}
+
   return (
-    <div className='flex flex-col  w-full items-center justify-center'>
+    <div className='flex flex-col  w-full items-center justify-center relative'>
   
-  <TextEditorComponent/>
+  <TextEditorComponent updateImage={updateImage}/>
    <Stage    onClick={(e)=>{
     
     dispatch(unselectId())
@@ -22,6 +30,7 @@ const CanvaCom = ({children}:{children:React.ReactNode}) => {
     <Layer   
    >
         {children}
+        <CanvaRichTextImage imageUrl={isImage}/>
     </Layer>
    </Stage>
    </div>
