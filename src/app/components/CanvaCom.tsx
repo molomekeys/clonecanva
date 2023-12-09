@@ -4,10 +4,13 @@ import { Layer, Stage } from 'react-konva';
 import { useAppDispatch } from '@/hooks';
 import {unselectId} from "../../features/canva/selectedCanva-slice"
 import {closeColorMenu} from "../../features/canva/menu-slice"
+import TextEditorComponent from './TextEditorComponent';
 const CanvaCom = ({children}:{children:React.ReactNode}) => {
     const dispatch=useAppDispatch()
   return (
     <div className='flex flex-col  w-full items-center justify-center'>
+  
+  <TextEditorComponent/>
    <Stage    onClick={(e)=>{
     
     dispatch(unselectId())
