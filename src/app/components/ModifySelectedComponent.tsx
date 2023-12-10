@@ -13,8 +13,8 @@ const ModifySelectedComponent = () => {
 const dispatch=useDispatch()
   console.log(allValues)
   console.log(selecTedId)
-  const filteredId=allValues.filter((e)=>{
-  if (e.id===selecTedId)
+  const filteredId=allValues?.filter((e)=>{
+  if (e?.id===selecTedId)
   {
     return e
   }
@@ -27,17 +27,19 @@ const dispatch=useDispatch()
        <div className="flex gap-4 items-center justify-center">
        <p>undo</p>
         <p>do</p>
-        <p onClick={()=>{
+{filteredId[0]?.id&&        <>        <p onClick={()=>{
         dispatch(increaseIndex(selecTedId))
      }}>Avancer</p>
        <p onClick={()=>{
         dispatch(decreaseIndex(selecTedId))
      }} className="whitespace-nowrap">Reculer</p>
+     </>}
+
        </div>
       {selecTedId.length>1&&  
       //ceci c'est pour garantir que un element à ete selectionner
       <div className="flex justify-between items-center w-full">
-     {filteredId[0].typeOfShape==="text"&&   
+     {filteredId[0]?.typeOfShape==="text"&&   
      <div className="flex gap-8 items-center justify-center">
      <div className="flex w-22">
           
@@ -74,9 +76,7 @@ const dispatch=useDispatch()
         <div className="flex items-center justify-between w-full gap-20">
       
   
-        <p>{filteredId[0]?.x}</p>
-        <p>{filteredId[0]?.y}</p>
-        <p>{filteredId[0]?.fontFamily}</p>
+       
     
         </div>
         </div>}

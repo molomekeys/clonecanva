@@ -14,11 +14,18 @@ function updateImage(e:string)
 {
   setIsImage(e)
 }
+const [valueOfText,setValueOfText]=useState("")
+function updateTextVal(e:string)
+{
+  setValueOfText(e)
+}
 
   return (
     <div className='flex flex-col  w-full items-center justify-center relative'>
   
-  <TextEditorComponent updateImage={updateImage}/>
+
+
+
    <Stage    onClick={(e)=>{
     
     dispatch(unselectId())

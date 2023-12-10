@@ -9,13 +9,13 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 
 import { motion } from 'framer-motion';
-const TransComponent = dynamic(() => import('./components/TransComponent'), {
+const TransComponent = dynamic(() => import('./components/shapeComponent/TransComponent'), {
   ssr: false,
 });
 const TextComponent = dynamic(() => import('./components/TextComponent'), {
   ssr: false,
 });
-const CircleComponent = dynamic(() => import('./components/CircleComponent'), {
+const CircleComponent = dynamic(() => import('./components/shapeComponent/CircleComponent'), {
   ssr: false,
 });
 
@@ -33,13 +33,15 @@ const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
+import LineArcComponent from './components/shapeComponent/LineArcComponent';
+import TriangleComponent from './components/shapeComponent/TriangleComponent';
 export default function Home() {
   const dispatch=useAppDispatch()
  const idSelected=useAppSelector((state)=>state.selectedCanva)
   const allRectangle=useAppSelector((state)=>state.rectangle)
 
   const filteredId=allRectangle.filter((e)=>{
-    if (e.id===idSelected)
+    if (e?.id===idSelected)
     {
       return e
     }
@@ -49,10 +51,10 @@ export default function Home() {
   
   const allTransComponent=allRectangle.map((e,i)=>{
 
-    switch(e.typeOfShape)
+    switch(e?.typeOfShape)
     {
       case "rectangle":
-    return <TransComponent 
+    return <TransComponent  id={e.id}
     heigth={e.height} width={e.width}
      color={e.color} x={e.x}
     y={e.y} isSelect={e.id===idSelected}
@@ -72,7 +74,28 @@ export default function Home() {
     />
     break;
     case "circle" :
-    return <CircleComponent   radius={e.radius} color={e.color} x={e.x}
+    return <CircleComponent  id={e.id}
+      radius={e.radius} color={e.color} x={e.x}
+    y={e.y} isSelect={e.id===idSelected}
+    onSelect={()=>dispatch(setSelectedId(e.id))} 
+     key={i} 
+    
+    />
+    break;
+    case "triangle" :
+    return <TriangleComponent
+    
+    id={e.id}
+      radius={e.radius} color={e.color} x={e.x}
+    y={e.y} isSelect={e.id===idSelected}
+    onSelect={()=>dispatch(setSelectedId(e.id))} 
+     key={i} 
+    
+    />
+    break;
+    case "arrow" :
+    return <LineArcComponent  id={e.id}
+      radius={e.radius} color={e.color} x={e.x}
     y={e.y} isSelect={e.id===idSelected}
     onSelect={()=>dispatch(setSelectedId(e.id))} 
      key={i} 
@@ -84,7 +107,7 @@ export default function Home() {
 
 
   const infoOfSelected=allRectangle.filter((e)=>{
-    return e.id===idSelected
+    return e?.id===idSelected
   })
   console.log(infoOfSelected)
   return (
@@ -106,7 +129,7 @@ export default function Home() {
   className=' bg-slate-300 text-slate-50 z-20 inset-0
     '> </motion.textarea>
     </div>}
- <CanvaCom>
+ <CanvaCom >
       {...allTransComponent}
       </CanvaCom>
     </section>
