@@ -23,7 +23,13 @@ const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
   ssr: false,
 });
 
+const TriangleComponent = dynamic(() => import('./components/shapeComponent/TriangleComponent'), {
+  ssr: false,
+});
 
+const LineArcComponent= dynamic(() => import('./components/shapeComponent/LineArcComponent'), {
+  ssr: false,
+});
 
 
 
@@ -33,8 +39,6 @@ const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
-import LineArcComponent from './components/shapeComponent/LineArcComponent';
-import TriangleComponent from './components/shapeComponent/TriangleComponent';
 export default function Home() {
   const dispatch=useAppDispatch()
  const idSelected=useAppSelector((state)=>state.selectedCanva)
