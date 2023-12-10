@@ -40,7 +40,7 @@ const LineArcComponent = ({id,isSelect,onSelect,x,y,color,radius=30}:CircleProps
 points={[0, 0, 100, 0]} // Adjust the points to define the arrow shape
 
 
-stroke="black"
+stroke={color}
 strokeWidth={3}
     onClick={onSelect}  onDragEnd={(e)=>{
      

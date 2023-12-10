@@ -6,6 +6,8 @@ import { MdOutlineFormatColorText } from "react-icons/md";
 
 import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
 import { openColorMenu } from "@/features/canva/menu-slice";
+import { GrUndo,GrRedo } from "react-icons/gr";
+
 const ModifySelectedComponent = () => {
 
     const selecTedId=useAppSelector(state=>state.selectedCanva)
@@ -22,23 +24,32 @@ const dispatch=useDispatch()
   })
   console.log(filteredId)
   return (
-    <div className="   bg-slate-50 h-fit py-4 px-4  w-full gap-20  z-20 flex text-slate-800">
+    <div className=" divide-slate-300 divide-x-2
+      bg-slate-50 h-10 px-4  w-full  gap-2 
+       z-20 flex text-slate-800">
        
-       <div className="flex gap-4 items-center justify-center">
-       <p>undo</p>
-        <p>do</p>
-{filteredId[0]?.id&&        <>        <p onClick={()=>{
+       <div className="flex gap-4 items-center  max-w-fit
+        justify-center ">
+       <button>
+        <GrUndo size={20}/>
+       </button>
+       <button>
+        <GrRedo size={20}/>
+       </button>
+
+
+       </div>
+      {selecTedId.length>1&&  
+      
+      //ceci c'est pour garantir que un element à ete selectionner
+      <div className="flex justify-between items-center w-full pl-2 gap-4">
+        {filteredId[0]?.id&&        <>        <p onClick={()=>{
         dispatch(increaseIndex(selecTedId))
      }}>Avancer</p>
        <p onClick={()=>{
         dispatch(decreaseIndex(selecTedId))
      }} className="whitespace-nowrap">Reculer</p>
      </>}
-
-       </div>
-      {selecTedId.length>1&&  
-      //ceci c'est pour garantir que un element à ete selectionner
-      <div className="flex justify-between items-center w-full">
      {filteredId[0]?.typeOfShape==="text"&&   
      <div className="flex gap-8 items-center justify-center">
      <div className="flex w-22">

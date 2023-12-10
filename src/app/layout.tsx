@@ -28,7 +28,7 @@ export default function RootLayout({
           <MenuComponents/>
           </section>
 
-          <section className='w-full bg-slate-400 flex flex-col'>
+          <section className='w-full bg-slate-200 flex flex-col'>
           {children}
           </section>
        

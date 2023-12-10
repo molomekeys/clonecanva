@@ -123,7 +123,7 @@ export default function Home() {
       <div className='w-full gap-8'>
         <ModifySelectedComponent/>
       </div>
-      <section className='w-full flex 
+      <section className='w-full flex  h-full
        bg-slate-200  items-center justify-center relative  '>
       {filteredId[0]?.typeOfShape==="text"&& 
            <div className='absolute bg-black z-40 '>

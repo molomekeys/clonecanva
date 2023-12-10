@@ -21,7 +21,8 @@ function updateTextVal(e:string)
 }
 
   return (
-    <div className='flex flex-col  w-full items-center justify-center relative'>
+    <div className='flex flex-col  h-full 
+     w-full items-center justify-center relative'>
   
 
 
@@ -33,7 +34,7 @@ function updateTextVal(e:string)
    }}
     scale={{x:1,y:1}}
     className='bg-slate-50'
-   height={700} width={700} >
+   height={600} width={500} >
     <Layer   
    >
         {children}
