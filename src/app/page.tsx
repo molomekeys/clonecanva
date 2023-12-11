@@ -52,8 +52,11 @@ export default function Home() {
       
     })
 
-  
-  const allTransComponent=allRectangle.map((e,i)=>{
+    const selectedCnva=useAppSelector(e=>e.doUnredo.index)
+  const stateinitial=useAppSelector(e=>e.doUnredo.state)
+  console.log(selectedCnva)
+  const allTransComponent=stateinitial[selectedCnva]?.map((e,i)=>{
+    
 
     switch(e?.typeOfShape)
     {
@@ -113,7 +116,8 @@ export default function Home() {
   const infoOfSelected=allRectangle.filter((e)=>{
     return e?.id===idSelected
   })
-  console.log(infoOfSelected)
+
+  console.log(allTransComponent)
   return (
     <Provider store={store}>
     <main className="flex  w-full bg-slate-200
@@ -134,7 +138,7 @@ export default function Home() {
     '> </motion.textarea>
     </div>}
  <CanvaCom >
-      {...allTransComponent}
+      {allTransComponent}
       </CanvaCom>
     </section>
     </main>

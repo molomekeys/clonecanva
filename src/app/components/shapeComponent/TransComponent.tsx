@@ -11,13 +11,16 @@ interface RectangleProps{
    
    
 }
-import { useAppDispatch } from "@/hooks"
+import { useAppDispatch, useAppSelector } from "@/hooks"
 import { saveDragPosition } from "@/features/canva/rectangle-slice"
+import { saveNewState } from "@/features/canva/do-unredo-canva"
+
 const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleProps) => {
     
     const dispatch=useAppDispatch()
     const trRef=useRef<Konva.Transformer>(null)
     const rectRef=useRef(null)
+    const actualState=useAppSelector(state=>state.rectangle)
     console.log(id)
     useEffect(()=>{
 
@@ -45,6 +48,7 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
       console.log(id)
       console.log(e.target.x())
         dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
+        dispatch(saveNewState(actualState))
      
 
     }}

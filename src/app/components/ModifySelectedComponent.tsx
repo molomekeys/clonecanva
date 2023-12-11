@@ -7,7 +7,7 @@ import { MdOutlineFormatColorText } from "react-icons/md";
 import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
 import { openColorMenu } from "@/features/canva/menu-slice";
 import { GrUndo,GrRedo } from "react-icons/gr";
-
+import { goBackIndex,goNextIndex } from "@/features/canva/do-unredo-canva";
 const ModifySelectedComponent = () => {
 
     const selecTedId=useAppSelector(state=>state.selectedCanva)
@@ -30,10 +30,14 @@ const dispatch=useDispatch()
        
        <div className="flex gap-4 items-center  max-w-fit
         justify-center ">
-       <button>
+       <button onClick={()=>{
+        dispatch(goBackIndex())
+       }}>
         <GrUndo size={20}/>
        </button>
-       <button>
+       <button onClick={()=>{
+        dispatch(goNextIndex())
+       }}>
         <GrRedo size={20}/>
        </button>
 
