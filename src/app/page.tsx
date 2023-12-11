@@ -52,11 +52,10 @@ export default function Home() {
       
     })
 
-    const selectedCnva=useAppSelector(e=>e.doUnredo.index)
-  const stateinitial=useAppSelector(e=>e.doUnredo.state)
-  console.log(selectedCnva)
-  const allTransComponent=stateinitial[selectedCnva]?.map((e,i)=>{
-    
+    const selectedCnva=useAppSelector(e=>e.doUnredo)
+
+  const allTransComponent=selectedCnva.state[selectedCnva.index]?.map((e,i)=>{
+    console.log(selectedCnva.index)
 
     switch(e?.typeOfShape)
     {

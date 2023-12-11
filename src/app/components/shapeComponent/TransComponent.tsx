@@ -48,7 +48,7 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
       console.log(id)
       console.log(e.target.x())
         dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
-        dispatch(saveNewState(actualState))
+        // dispatch(saveNewState(actualState))
      
 
     }}

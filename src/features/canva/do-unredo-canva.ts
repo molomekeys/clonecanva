@@ -19,35 +19,46 @@ interface RectangleSlice{
     interface InitialState{
         index:number,state:RectangleSlice[][]
     }
+    interface PayloadActionSpec{
+        state:RectangleSlice[],newInfo:RectangleSlice
+    }
     const iniTialState:InitialState={index:0,state:[[{ color:"#b2a102",x:300,y:200,height:300,
     width:100,typeOfShape:"rectangle",id:v4()}]]}
 
     
     const doUnRedoCanvaSlice=createSlice({name:"BigState",
         initialState:iniTialState,reducers:{
-            saveNewState:(state,action:PayloadAction<RectangleSlice[]>)=>{
+            saveNewState:(state,action:PayloadAction<PayloadActionSpec>)=>{
 
                 const momo = state.index
+                console.log(momo)
+                const nonoiNDEX=state.state.length
+                const newArray=[...state.state]
+                const testBro=newArray[nonoiNDEX-1]
 
-                return {index:momo+1,state:[...state.state,[...action.payload]]}
+
+                const newArrayBro=testBro.concat(action.payload.newInfo)
+
+
+                return {index:momo+1,state:[...state.state,newArrayBro]}
                 
 
             },goBackIndex:(state)=>{
                 if(state.index===0)
                 {
-                    return {index:0,state:[...state.state]}
+                    return {index:0,state:state.state}
                 }
                 else 
                 {
                     const momo = state.index
-                    return {index:momo-1,state:[...state.state]}
+                    return {index:momo-1,state:state.state}
 
                 }
             }
             ,goNextIndex:(state)=>{
                 if(state.state.length===1)
                 {
-                    return {index:0,state:[...state.state]}
+                    return state
                 }
                 else if(state.state.length-1===state.index){
                     return {index:state.index,state:[...state.state]}
