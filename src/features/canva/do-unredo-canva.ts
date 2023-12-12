@@ -150,6 +150,11 @@ interface RectangleSlice{
                             return {...e,x:e.x,
                             y:(state.stageInfo.heigth-(fontSize))}
                         }
+                        else if(e.typeOfShape=="circle")
+                        {
+                            return {...e,x:e.x,
+                                y:(state.stageInfo.heigth-(e.radius||0))}
+                        }
                         else  {
                          
                             return {...e,x:e.x,
@@ -174,6 +179,11 @@ interface RectangleSlice{
                         let fontSize=e?.fontSize||0
                         return {...e,x:e.x,
                         y:(state.stageInfo.heigth-fontSize)}
+                    }
+                    else if(e.typeOfShape=="circle")
+                    {
+                        return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-(e.radius||0))}
                     }
                     else {
                         
@@ -208,10 +218,15 @@ interface RectangleSlice{
                             return {...e,x:e.x,
                             y:0}
                         }
+                        else if(e.typeOfShape=="circle")
+                        {
+                            return {...e,x:e.x,
+                                y:(state.stageInfo.heigth-(e.radius||0))}
+                        }
                         else  {
                          
                             return {...e,x:e.x,
-                            y:0}
+                                y:0}
                         }
                         }
                         else {
@@ -233,10 +248,287 @@ interface RectangleSlice{
                         return {...e,x:e.x,
                         y:(0)}
                     }
+                    else if(e.typeOfShape=="circle")
+                    {
+                        return {...e,x:e.x,
+                            y:((e.radius||0))}
+                    }
                     else {
                         
                         return {...e,x:e.x,
                         y:(0)}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnRight:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,x:state.stageInfo.width-e.width,
+                            y:e.y}
+                        }
+                        else if(e.typeOfShape=="circle")
+                        {
+                            return {...e,x:(state.stageInfo.width-(e.radius||0)),
+                                y:(e.y)}
+                        }
+                        else  {
+                         
+                            return {...e,x:e.x,
+                                y:e.y}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,x:state.stageInfo.width-e.width,
+                        y:e.y}
+                    }
+                    else if(e.typeOfShape=="circle")
+                    {
+                        return {...e,x:(state.stageInfo.width-(e.radius||0)),
+                            y:(e.y)}
+                    }
+                    else  {
+                     
+                        return {...e,x:(state.stageInfo.width-(e.width)),
+                            y:e.y}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnLeft:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,x:0,
+                            y:e.y}
+                        }
+                        else if(e.typeOfShape=="circle")
+                        {
+                            return {...e,x:e.radius||0,
+                                y:(e.y)}
+                        }
+                        else  {
+                         
+                            return {...e,x:e.x,
+                                y:e.y}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,x:0,
+                        y:e.y}
+                    }
+                    else if(e.typeOfShape=="circle")
+                    {
+                        return {...e,x:(e.radius||0),
+                            y:(e.y)}
+                    }
+                    else  {
+                     
+                        return {...e,x:(0),
+                            y:e.y}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnCenterVertical:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-e.height)/2}
+                        }
+                        else if(e.typeOfShape=="circle"&&e.radius)
+                        {
+                            return {...e,x:e.x,
+                                y:(state.stageInfo.heigth)/2}
+                        }
+                        else  {
+                         
+                            return {...e,x:e.x,
+                                y:(state.stageInfo.heigth-e.height)/2}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-e.height)/2}
+                    }
+                    else if(e.typeOfShape=="circle"&&e.radius)
+                    {
+                        return {...e,x:e.x,
+                            y:(state.stageInfo.heigth)/2}
+                    }
+                    else  {
+                     
+                        return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-e.height)/2}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnCenterHorizontal:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,y:e.y,
+                            x:(state.stageInfo.width-e.width)/2}
+                        }
+                        else if(e.typeOfShape=="circle"&&e.radius)
+                        {
+                            return {...e,y:e.y,
+                                x:(state.stageInfo.width)/2}
+                        }
+                        else  {
+                         
+                            return {...e,y:e.y,
+                                x:(state.stageInfo.width-e.width)/2}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,y:e.y,
+                        x:(state.stageInfo.width-e.width)/2}
+                    }
+                    else if(e.typeOfShape=="circle"&&e.radius)
+                    {
+                        return {...e,y:e.y,
+                            x:(state.stageInfo.width)/2}
+                    }
+                    else  {
+                     
+                        return {...e,y:e.y,
+                            x:(state.stageInfo.width-e.width)/2}
                     }
                     }
                     else {
@@ -305,4 +597,4 @@ interface RectangleSlice{
         }
     })
     export  default doUnRedoCanvaSlice.reducer
-    export const {putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
+    export const {putOnCenterHorizontal,putOnCenterVertical,putOnLeft,putOnRight,putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
