@@ -8,10 +8,17 @@ import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,
 import { openColorMenu } from "@/features/canva/menu-slice";
 import { GrUndo,GrRedo } from "react-icons/gr";
 import { goBackIndex,goNextIndex } from "@/features/canva/do-unredo-canva";
-const ModifySelectedComponent = () => {
+import { FaFileDownload } from "react-icons/fa";
+
+interface ModifySelected{
+  savePdf:()=>void
+}
+
+const ModifySelectedComponent = ({savePdf}:ModifySelected) => {
 
     const selecTedId=useAppSelector(state=>state.selectedCanva)
   const allValues=useAppSelector(state=>state.rectangle)
+  const indexValMo=useAppSelector(s=>s.doUnredo)
 const dispatch=useDispatch()
   console.log(allValues)
   console.log(selecTedId)
@@ -24,18 +31,19 @@ const dispatch=useDispatch()
   })
   console.log(filteredId)
   return (
-    <div className=" divide-slate-300 divide-x-2
+    <div className=" relative justify-between
       bg-slate-50 h-10 px-4  w-full  gap-2 
        z-20 flex text-slate-800">
        
        <div className="flex gap-4 items-center  max-w-fit
         justify-center ">
-       <button onClick={()=>{
+       <button className={`${indexValMo.index>0? "text-slate-500" : "text-slate-300"}`} onClick={()=>{
         dispatch(goBackIndex())
        }}>
         <GrUndo size={20}/>
        </button>
-       <button onClick={()=>{
+       <button className={`${indexValMo.index<indexValMo.state.length-1? "text-slate-500" : "text-slate-300"}`}
+        onClick={()=>{
         dispatch(goNextIndex())
        }}>
         <GrRedo size={20}/>
@@ -47,6 +55,8 @@ const dispatch=useDispatch()
       
       //ceci c'est pour garantir que un element à ete selectionner
       <div className="flex justify-between items-center w-full pl-2 gap-4">
+
+
         {filteredId[0]?.id&&        <>        <p onClick={()=>{
         dispatch(increaseIndex(selecTedId))
      }}>Avancer</p>
@@ -88,13 +98,18 @@ const dispatch=useDispatch()
         }}>
         <MdOutlineFormatColorText size={20}/>
             </div>
-        <div className="flex items-center justify-between w-full gap-20">
-      
-  
        
-    
-        </div>
         </div>}
+        <div className="flex  ">
+
+        <button  
+         >
+          <FaFileDownload  onClick={()=>{
+            console.log("slt")
+            savePdf()}}
+          size={20}/>
+        </button>
+       </div>
         </div>
   )
 }

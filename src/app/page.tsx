@@ -2,12 +2,12 @@
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
 
-import { useState } from 'react';
+import React, { useRef, useState ,RefObject,MutableRefObject} from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch } from '@/hooks';
 import { Provider } from 'react-redux';
 import { store } from './store';
-
+import jsPDF from 'jspdf';
 import { motion } from 'framer-motion';
 const TransComponent = dynamic(() => import('./components/shapeComponent/TransComponent'), {
   ssr: false,
@@ -39,6 +39,8 @@ const LineArcComponent= dynamic(() => import('./components/shapeComponent/LineAr
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
+import Konva from 'konva';
+import { Stage } from 'react-konva';
 export default function Home() {
   const dispatch=useAppDispatch()
  const idSelected=useAppSelector((state)=>state.selectedCanva)
@@ -117,6 +119,27 @@ export default function Home() {
   })
 
   console.log(allTransComponent)
+  const refTestMomo=useRef<Konva.Stage>(null)
+
+  //function qui permet de sauvegarde le pdf
+  function handleSavingPdf(){
+    console.log(refTestMomo)
+    if(refTestMomo.current!=null)
+    {
+      console.log(refTestMomo.current)
+      
+      const momo =new jsPDF('p',"px",[refTestMomo.current.width(),
+        refTestMomo.current.height()])
+      momo.addImage(
+        refTestMomo.current.toDataURL({ pixelRatio: 2 }),
+        0,
+        0,
+        refTestMomo.current.width(),
+        refTestMomo.current.height()
+      );
+      momo.save("example")
+    }
+  }
   return (
     <Provider store={store}>
     <main className="flex  w-full bg-slate-200
@@ -124,19 +147,22 @@ export default function Home() {
       
       
       <div className='w-full gap-8'>
-        <ModifySelectedComponent/>
+        <ModifySelectedComponent  savePdf={handleSavingPdf}/>
       </div>
       <section className='w-full flex  h-full
        bg-slate-200  items-center justify-center relative  '>
       {filteredId[0]?.typeOfShape==="text"&& 
            <div className='absolute bg-black z-40 '>
  
-  <motion.textarea   value={filteredId[0].text&&filteredId[0].text}
+  <motion.textarea    value={filteredId[0].text&&filteredId[0].text}
   
   className=' bg-slate-300 text-slate-50 z-20 inset-0
     '> </motion.textarea>
     </div>}
- <CanvaCom >
+    <div>
+     
+      </div>
+ <CanvaCom refOfStage={refTestMomo}  >
       {allTransComponent}
       </CanvaCom>
     </section>

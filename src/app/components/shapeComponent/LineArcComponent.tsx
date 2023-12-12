@@ -2,6 +2,8 @@
 import Konva from "konva"
 import { useEffect, useRef, useState } from "react"
 import {Rect,Transformer,Arrow} from "react-konva"
+import { changeOnDrag } from "@/features/canva/do-unredo-canva"
+
 interface CircleProps{
     onSelect:()=>void 
     isSelect :boolean,color:string
@@ -46,12 +48,12 @@ strokeWidth={3}
      
      console.log(id)
      console.log(e.target.x())
-       dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
+       dispatch(changeOnDrag({id,x:e.target.x(),y:e.target.y()}))
     
 
    }}
     ref={circleRef} x={x} y={y} radius={radius}  
-     onDblClick={onSelect} fill={"black"} draggable/>
+     onDblClick={onSelect} fill={color} draggable/>
 
 {isSelect&&  circleRef.current&&  <Transformer flipEnabled={false} ref={trRef}/>}
 

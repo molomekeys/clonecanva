@@ -10,7 +10,7 @@ import { SlPicture } from "react-icons/sl";
 import ShapeMenuElement from "./ShapeMenuElement";
 import TextMenuElement from "./TextMenuElement";
 import { CirclePicker, SketchPicker, TwitterPicker } from "react-color";
-import { changeColor } from "@/features/canva/rectangle-slice";
+import { changeColor } from "@/features/canva/do-unredo-canva";
 const MenuComponents = () => {
     const ValueSelected=useAppSelector(state=>state.selectedCanva)
     const dispatch=useAppDispatch()
@@ -85,16 +85,16 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
     h-full z-20 flex flex-col items-center justify-center">
        
        <TwitterPicker    onChangeComplete={(e)=>{
-        dispatch(changeColor({color:e.hex,idSelected:ValueSelected}))
+        dispatch(changeColor({color:e.hex,id:ValueSelected}))
        }}
        color={filteredId[0]?.color}
         triangle="hide" className="bg-slate-50 "/> 
        <CirclePicker    onChangeComplete={(e)=>{
-        dispatch(changeColor({color:e.hex,idSelected:ValueSelected}))
+        dispatch(changeColor({color:e.hex,id:ValueSelected}))
        }}
        color={filteredId[0]?.color}/>
        <SketchPicker  onChange={(e)=>{
-        dispatch(changeColor({color:e.hex,idSelected:ValueSelected}))
+        dispatch(changeColor({color:e.hex,id:ValueSelected}))
        }}
         color={filteredId[0]?.color}/>
         </div>}

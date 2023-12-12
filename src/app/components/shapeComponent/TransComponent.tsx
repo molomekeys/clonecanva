@@ -13,7 +13,7 @@ interface RectangleProps{
 }
 import { useAppDispatch, useAppSelector } from "@/hooks"
 import { saveDragPosition } from "@/features/canva/rectangle-slice"
-import { saveNewState } from "@/features/canva/do-unredo-canva"
+import { changeOnDrag, saveNewState } from "@/features/canva/do-unredo-canva"
 
 const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleProps) => {
     
@@ -47,7 +47,7 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
      
       console.log(id)
       console.log(e.target.x())
-        dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
+        dispatch(changeOnDrag({id,x:e.target.x(),y:e.target.y()}))
         // dispatch(saveNewState(actualState))
      
 

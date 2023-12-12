@@ -1,14 +1,28 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useRef, useState,Ref, forwardRef, LegacyRef, MutableRefObject, useEffect } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useAppDispatch } from '@/hooks';
 import {unselectId} from "../../features/canva/selectedCanva-slice"
 import {closeColorMenu} from "../../features/canva/menu-slice"
 import TextEditorComponent from './TextEditorComponent';
 import CanvaRichTextImage from './CanvaRichTextImage';
-const CanvaCom = ({children}:{children:React.ReactNode}) => {
+import { StageConfig } from 'konva/lib/Stage';
+import jsPDF, { jsPDFAPI } from 'jspdf';
+import  Konva from "konva"
+
+
+interface Canva {
+  children:React.ReactNode
+  refOfStage:React.RefObject<Konva.Stage>
+
+}
+interface Momo{
+
+}
+const CanvaCom = ({children,refOfStage}:Canva) => {
     const dispatch=useAppDispatch()
 
+    
 const [isImage,setIsImage]=useState("")
 function updateImage(e:string)
 {
@@ -20,15 +34,18 @@ function updateTextVal(e:string)
   setValueOfText(e)
 }
 
+
   return (
-    <div className='flex flex-col  h-full 
+    <div 
+     className='flex flex-col  h-full 
      w-full items-center justify-center relative'>
+
+
+
+
+   <Stage ref={refOfStage}
+     onClick={(e)=>{
   
-
-
-
-   <Stage    onClick={(e)=>{
-    
     dispatch(unselectId())
     dispatch(closeColorMenu())
    }}
@@ -37,7 +54,8 @@ function updateTextVal(e:string)
    height={600} width={500} >
     <Layer   
    >
-        {children}
+  
+      {children}
         <CanvaRichTextImage imageUrl={isImage}/>
     </Layer>
    </Stage>

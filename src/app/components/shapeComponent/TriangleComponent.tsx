@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import {Rect,Transformer,RegularPolygon} from "react-konva"
 import { useAppDispatch } from "@/hooks"
 import { saveDragPosition } from "@/features/canva/rectangle-slice"
+import { changeOnDrag } from "@/features/canva/do-unredo-canva"
 interface CircleProps{
     onSelect:()=>void 
     isSelect :boolean,color:string
@@ -49,7 +50,7 @@ points={[0, 0, 100, 0]} // Adjust the points to define the arrow shape
      
      console.log(id)
      console.log(e.target.x())
-       dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
+       dispatch(changeOnDrag({id,x:e.target.x(),y:e.target.y()}))
     
 
    }}

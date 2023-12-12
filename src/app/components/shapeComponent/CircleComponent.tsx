@@ -11,7 +11,7 @@ interface CircleProps{
    
 }
 import { useAppDispatch } from "@/hooks"
-import { saveDragPosition } from "@/features/canva/rectangle-slice"
+import { changeOnDrag } from "@/features/canva/do-unredo-canva"
 const CircleComponent = ({id,isSelect,onSelect,x,y,color,radius=30}:CircleProps) => {
     
     const trRef=useRef<Konva.Transformer>(null)
@@ -39,7 +39,7 @@ const CircleComponent = ({id,isSelect,onSelect,x,y,color,radius=30}:CircleProps)
      
      console.log(id)
      console.log(e.target.x())
-       dispatch(saveDragPosition({id,x:e.target.x(),y:e.target.y()}))
+       dispatch(changeOnDrag({id,x:e.target.x(),y:e.target.y()}))
     
 
    }}
