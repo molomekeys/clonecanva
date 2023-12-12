@@ -40,7 +40,8 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
   
   return (
    <>
-    <Rect   onDblTap={onSelect} onDragStart={(e)=>{
+    <Rect 
+     onDblTap={onSelect} onDragStart={(e)=>{
         console.log('wesh')
          }}
     ref={rectRef} x={x} y={y} onDragEnd={(e)=>{

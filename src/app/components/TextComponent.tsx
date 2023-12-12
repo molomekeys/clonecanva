@@ -41,7 +41,7 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
         e.cancelBubble=true
         onSelect()
     }}
- fontStyle={fontStyle} listening
+ fontStyle={"mono"} listening
      ref={textRef} x={x} y={y}  text={text} fontSize={fontSize}
    
     

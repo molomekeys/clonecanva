@@ -7,7 +7,7 @@ import { MdOutlineFormatColorText } from "react-icons/md";
 import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
 import { openColorMenu } from "@/features/canva/menu-slice";
 import { GrUndo,GrRedo } from "react-icons/gr";
-import { goBackIndex,goNextIndex } from "@/features/canva/do-unredo-canva";
+import { goBackIndex,goNextIndex,putOnBottom, putOnTop } from "@/features/canva/do-unredo-canva";
 import { FaFileDownload } from "react-icons/fa";
 
 interface ModifySelected{
@@ -98,6 +98,22 @@ const dispatch=useDispatch()
         }}>
         <MdOutlineFormatColorText size={20}/>
             </div>
+
+            <div className="" onClick={()=>{
+              console.log("coucou")
+            dispatch(putOnBottom(selecTedId))
+        }}>
+       <p>put on bottom</p>
+       
+            </div>
+            <div className="" onClick={()=>{
+              console.log("coucou")
+            dispatch(putOnTop(selecTedId))
+        }}>
+       <p>put on top</p>
+       
+            </div>
+
        
         </div>}
         <div className="flex  ">

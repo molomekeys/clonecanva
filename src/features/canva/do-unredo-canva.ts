@@ -13,10 +13,14 @@ interface RectangleSlice{
     fontSize?:number
     radius?:number
     id:string
+    
     fontFamily?:string
     text?:string
     }
     interface InitialState{
+        stageInfo:{
+           width:number ,heigth:number
+        },
         index:number,state:RectangleSlice[][]
     }
     interface PayloadActionSpec{
@@ -31,8 +35,14 @@ interface RectangleSlice{
     }
 
 
-    const iniTialState:InitialState={index:0,state:[[{ color:"#b2a102",x:300,y:200,height:300,
-    width:100,typeOfShape:"rectangle",id:v4()}]]}
+    interface changePosition{
+        id:string ,x:number,y:number
+    }
+
+    const iniTialState:InitialState={stageInfo:{
+        width:500,heigth:600
+    },index:0,state:[[{ color:"#b2a102",x:300,y:200,height:50,
+    width:50,typeOfShape:"text",id:v4(),text:"hello bro",fontSize:20}]]}
 
     
     const doUnRedoCanvaSlice=createSlice({name:"BigState",
@@ -44,7 +54,7 @@ interface RectangleSlice{
                         const momoTest=[...state.state]
                       
                        const newArrayToPut=momoTest.slice(1)
-                       return {index:state.state.length-1,state:[...newArrayToPut,[...momoTest[state.state.length-1],action.payload.newInfo]]}
+                       return {stageInfo:state.stageInfo,index:state.state.length-1,state:[...newArrayToPut,[...momoTest[state.state.length-1],action.payload.newInfo]]}
 
                     }
 
@@ -53,7 +63,7 @@ interface RectangleSlice{
                 {
                     const momoTest=[...state.state]
                     const newTest=momoTest[state.index]
-                    return {index:1,state:[newTest,[...newTest,action.payload.newInfo]]}
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,[...newTest,action.payload.newInfo]]}
                 }
                 else {
                 const momo = state.index
@@ -67,18 +77,18 @@ interface RectangleSlice{
                 const newArrayBro=testBro.concat(action.payload.newInfo)
 
 
-                return {index:nonoIndex,state:[...state.state,newArrayBro]}
+                return {stageInfo:state.stageInfo,index:nonoIndex,state:[...state.state,newArrayBro]}
             }
 
             },goBackIndex:(state)=>{
                 if(state.index===0)
                 {
-                    return {index:0,state:state.state}
+                    return {stageInfo:state.stageInfo,index:0,state:state.state}
                 }
                 else 
                 {
                     const momo = state.index
-                    return {index:momo-1,state:state.state}
+                    return {stageInfo:state.stageInfo,index:momo-1,state:state.state}
 
                 }
             },changeColor:(state,action:PayloadAction<ChangeColor>)=>{
@@ -104,7 +114,7 @@ interface RectangleSlice{
                     })
 
 
-                    return {index:1,state:[newTest,momoBoum]}
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
                 }
                 else {
                 const newArrayTest=[...state.state]
@@ -117,7 +127,123 @@ interface RectangleSlice{
                         return {...e}
                     }
                 })
-                return {index:length,state:[...state.state,momoBoum]}
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnBottom:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-(fontSize))}
+                        }
+                        else  {
+                         
+                            return {...e,x:e.x,
+                            y:(state.stageInfo.heigth-e.height)}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,x:e.x,
+                        y:(state.stageInfo.heigth-fontSize)}
+                    }
+                    else {
+                        
+                        return {...e,x:e.x,
+                        y:(state.stageInfo.heigth-e.height)}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            },putOnTop:(state,action:PayloadAction<String>)=>{
+                const id=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape=="text")
+                            {
+                            let fontSize=e?.fontSize||0
+                            return {...e,x:e.x,
+                            y:0}
+                        }
+                        else  {
+                         
+                            return {...e,x:e.x,
+                            y:0}
+                        }
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape=="text")
+                        {
+                        let fontSize=e?.fontSize||0
+                        return {...e,x:e.x,
+                        y:(0)}
+                    }
+                    else {
+                        
+                        return {...e,x:e.x,
+                        y:(0)}
+                    }
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
             }
 
             }
@@ -127,13 +253,13 @@ interface RectangleSlice{
                     return state
                 }
                 else if(state.state.length-1===state.index){
-                    return {index:state.index,state:[...state.state]}
+                    return {stageInfo:state.stageInfo,index:state.index,state:[...state.state]}
 
                 }
                 else 
                 {
                     const momo =state.index
-                    return {index:momo+1,state:[...state.state]}
+                    return {stageInfo:state.stageInfo,index:momo+1,state:[...state.state]}
 
                 }
             },changeOnDrag:(state,action:PayloadAction<ChangeOnDrag>)=>{
@@ -159,7 +285,7 @@ interface RectangleSlice{
                     })
 
 
-                    return {index:1,state:[newTest,momoBoum]}
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
                 }
                 else {
                 const newArrayTest=[...state.state]
@@ -172,11 +298,11 @@ interface RectangleSlice{
                         return {...e}
                     }
                 })
-                return {index:length,state:[...state.state,momoBoum]}
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
             }
 
             }
         }
     })
     export  default doUnRedoCanvaSlice.reducer
-    export const {changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
+    export const {putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
