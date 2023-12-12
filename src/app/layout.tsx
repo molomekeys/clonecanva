@@ -21,14 +21,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="flex flex-col">
         <ReduxProvider>
+        <nav className='w-full bg-gradient-to-r to-[#3195b9] via-[#2ba8a6] from-[#16879ba7] h-12'>
+            
+            </nav>
          <section className='flex  w-screen h-screen relative'>
+         
           <section className={``}>
           <MenuComponents/>
           </section>
 
           <section className='w-full bg-slate-200 flex flex-col'>
+            
           {children}
           </section>
        

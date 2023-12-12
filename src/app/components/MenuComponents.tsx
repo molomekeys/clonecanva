@@ -36,7 +36,15 @@ const MenuComponents = () => {
   })
   const formatedArrayColor=new Set(merouaneArrayColor)
   const formatedMomo=Array.from(formatedArrayColor).map((e,i)=>{
-    return <FaSquare size={50} color={e} key={i}/>
+   return <button  onClick={(momo)=>{
+      dispatch(changeColor({color:e,id:selecTedId}))
+    }}>
+    <FaSquare 
+
+    stroke="black" strokeWidth={2}
+
+    size={50} color={e} key={i}/>
+    </button>
   })
   const colorPalette = [
     '#000', '#FF7F00', '#545454', '#A6A6A6',
@@ -65,40 +73,40 @@ const MenuComponents = () => {
 
   return (
     <section className="flex w-full h-full ">
-<div className={`flex flex-col text-slate-50 bg-slate-900 
+<div className={`flex flex-col text-slate-50 bg-[#18191A]   gap-6 
    ${(valueMenu.isOpen===true||valueMenu.isColor===true)? "w-fit " : "w-full "} `}>
    
 
 
          <div   onClick={()=>{
             dispatch(openMenu("photos"))}}
-            className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="photos"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}
+            className={`flex flex-col items-center  p-2 py-4 ${valueMenu.typeMenu==="photos"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
 >
 <SlPicture id="galeryShape"  size={20}/>
-<label htmlFor="galeryShape" className="text-xs font-semibold text-slate-300">{`Photos`}</label>
+<label htmlFor="galeryShape" className="text-xs ">{`Photos`}</label>
 </div>
      
      <div   onClick={()=>{
             dispatch(openMenu("element"))}}
-className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="element"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}>
+className={`flex flex-col items-center gap-2 p-2 py-4   ${valueMenu.typeMenu==="element"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}>
 <LuShapes id="luShape"  size={20}/>
-<label htmlFor="luShape" className="text-xs font-semibold text-slate-300">{`Élements`}</label>
+<label htmlFor="luShape" className="text-xs ">{`Élements`}</label>
 </div>
 
 
 <div   onClick={()=>{
             dispatch(openMenu("text"))}}
-            className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="text"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}
+            className={`flex flex-col items-center gap-2 p-2 py-4  ${valueMenu.typeMenu==="text"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
 >
 <RiText id="riText"  size={20}/>
-<label htmlFor="riText" className="text-xs font-semibold text-slate-300">Text</label>
+<label htmlFor="riText" className="text-xs ">Text</label>
 </div>
 
 
 
 </div>
 {(valueMenu.isOpen===true||valueMenu.isColor===true)&&<div className="w-[400px] 
- bg-slate-800 relative flex flex-col ">
+ bg-[#252627] relative flex flex-col ">
     
     
    {valueMenu.isOpen&& <button  onClick={()=>{
@@ -119,7 +127,7 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
     h-full z-20 flex flex-col   ">
              <p className="text-xs text-left  font-semibold py-2 ">Couleurs du document</p>
 
-    <div className="bg-transparent grid grid-cols-5 gap-4 ">
+    <div className="bg-transparent grid grid-cols-6 gap-2 ">
        {formatedMomo}
        </div>
        <p className="text-xs text-left  font-semibold py-2 ">Couleurs unis</p>

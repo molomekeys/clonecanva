@@ -15,13 +15,13 @@ const menuSlice=createSlice({
         openMenu:(state,action:PayloadAction<string>)=>{
             return {...state,typeMenu:action.payload,isOpen:true}
         },closeMenu:(state)=>{
-            return {...state,isOpen:false}
+            return {...state,isOpen:false,typeMenu:""}
         },
         openColorMenu:(state)=>{
             return {...state,isColor:!state.isColor}
         },
         closeColorMenu:(state)=>{
-            return {...state,isColor:false}
+            return {...state,isColor:false,}
         }
 
     }
