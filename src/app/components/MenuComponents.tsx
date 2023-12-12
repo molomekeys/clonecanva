@@ -9,13 +9,16 @@ import { IoIosArrowBack } from "react-icons/io";
 import { SlPicture } from "react-icons/sl";
 import ShapeMenuElement from "./ShapeMenuElement";
 import TextMenuElement from "./TextMenuElement";
-import { CirclePicker, SketchPicker, TwitterPicker } from "react-color";
+import { CirclePicker, GithubPicker, SketchPicker, TwitterPicker } from "react-color";
 import { changeColor } from "@/features/canva/do-unredo-canva";
+import { FaSquare } from "react-icons/fa";
+
 const MenuComponents = () => {
     const ValueSelected=useAppSelector(state=>state.selectedCanva)
     const dispatch=useAppDispatch()
     const valueMenu=useAppSelector(state=>state.menuSelected)
 
+    const indexOfState=useAppSelector(st=>st.doUnredo)
     const selecTedId=useAppSelector(state=>state.selectedCanva)
   const allValues=useAppSelector(state=>state.rectangle)
 
@@ -28,6 +31,37 @@ const MenuComponents = () => {
   }
     
   })
+  const merouaneArrayColor=indexOfState.state[indexOfState.index].map((e)=>{
+    return e.color
+  })
+  const formatedArrayColor=new Set(merouaneArrayColor)
+  const formatedMomo=Array.from(formatedArrayColor).map((e,i)=>{
+    return <FaSquare size={50} color={e} key={i}/>
+  })
+  const colorPalette = [
+    '#000', '#FF7F00', '#545454', '#A6A6A6',
+    '#D9D9D9', '#fff', '#FE3130', '#FF5756',
+    '#FE65C3', '#CA6BE5', '#8C51FF', '#5E16EA',
+    '#FF6666', '#FFB266', '#FFFF66', '#B2FF66',
+    '#66FF66', '#66FFB2', '#66FFFF', '#66B2FF',
+    '#6666FF', '#B266FF', '#FF66FF', '#FF66B2',
+    '#999999', '#CCCCCC', '#E5E5E5', '#FFFFFF'
+  ];
+  
+  const UnifiedcOLOR=colorPalette.map((e,i)=>{
+    return  <button  onClick={(momo)=>{
+      dispatch(changeColor({color:e,id:selecTedId}))
+    }}>
+   <FaSquare  
+    stroke="black" strokeWidth={2}
+  
+  size={50} color={e} key={i}/>
+  </button>
+  })
+
+
+
+  console.log(formatedArrayColor)
 
   return (
     <section className="flex w-full h-full ">
@@ -40,15 +74,15 @@ const MenuComponents = () => {
             dispatch(openMenu("photos"))}}
             className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="photos"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}
 >
-<SlPicture id="galeryShape"  size={30}/>
-<label htmlFor="galeryShape" className="text-xs font-semibold">{`Photos`}</label>
+<SlPicture id="galeryShape"  size={20}/>
+<label htmlFor="galeryShape" className="text-xs font-semibold text-slate-300">{`Photos`}</label>
 </div>
      
      <div   onClick={()=>{
             dispatch(openMenu("element"))}}
 className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="element"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}>
-<LuShapes id="luShape"  size={30}/>
-<label htmlFor="luShape" className="text-xs font-semibold">{`Élements`}</label>
+<LuShapes id="luShape"  size={20}/>
+<label htmlFor="luShape" className="text-xs font-semibold text-slate-300">{`Élements`}</label>
 </div>
 
 
@@ -56,8 +90,8 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
             dispatch(openMenu("text"))}}
             className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="text"? "bg-slate-800" : "bg-slate-900"} justify-center w-full`}
 >
-<RiText id="riText"  size={30}/>
-<label htmlFor="riText" className="text-xs font-semibold">Text</label>
+<RiText id="riText"  size={20}/>
+<label htmlFor="riText" className="text-xs font-semibold text-slate-300">Text</label>
 </div>
 
 
@@ -81,22 +115,19 @@ className={`flex flex-col items-center gap-2  p-6 ${valueMenu.typeMenu==="elemen
 
     
     {(valueMenu.isColor&&ValueSelected.length>3)&&
-    <div className="absolute gap-4  bg-slate-50 w-full 
-    h-full z-20 flex flex-col items-center justify-center">
-       
-       <TwitterPicker    onChangeComplete={(e)=>{
-        dispatch(changeColor({color:e.hex,id:ValueSelected}))
-       }}
-       color={filteredId[0]?.color}
-        triangle="hide" className="bg-slate-50 "/> 
-       <CirclePicker    onChangeComplete={(e)=>{
-        dispatch(changeColor({color:e.hex,id:ValueSelected}))
-       }}
-       color={filteredId[0]?.color}/>
-       <SketchPicker  onChange={(e)=>{
-        dispatch(changeColor({color:e.hex,id:ValueSelected}))
-       }}
-        color={filteredId[0]?.color}/>
+    <div className="absolute  bg-slate-50 w-full  p-4
+    h-full z-20 flex flex-col   ">
+             <p className="text-xs text-left  font-semibold py-2 ">Couleurs du document</p>
+
+    <div className="bg-transparent grid grid-cols-5 gap-4 ">
+       {formatedMomo}
+       </div>
+       <p className="text-xs text-left  font-semibold py-2 ">Couleurs unis</p>
+
+       <div className="bg-transparent grid grid-cols-6 gap-2">
+       {UnifiedcOLOR}
+       </div>
+    
         </div>}
 
     
