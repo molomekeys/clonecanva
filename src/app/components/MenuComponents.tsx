@@ -12,6 +12,7 @@ import TextMenuElement from "./TextMenuElement";
 import { CirclePicker, GithubPicker, SketchPicker, TwitterPicker } from "react-color";
 import { changeColor } from "@/features/canva/do-unredo-canva";
 import { FaSquare } from "react-icons/fa";
+import PositionComponent from "./menu/PositionComponent";
 
 const MenuComponents = () => {
     const ValueSelected=useAppSelector(state=>state.selectedCanva)
@@ -74,7 +75,7 @@ const MenuComponents = () => {
   return (
     <section className="flex w-full h-full ">
 <div className={`flex flex-col text-slate-50 bg-[#18191A]   gap-6 
-   ${(valueMenu.isOpen===true||valueMenu.isColor===true)? "w-fit " : "w-full "} `}>
+   ${(valueMenu.isOpen===true||valueMenu.isColor===true||valueMenu.isPosition)? "w-fit " : "w-full "} `}>
    
 
 
@@ -105,12 +106,14 @@ className={`flex flex-col items-center gap-2 p-2 py-4   ${valueMenu.typeMenu==="
 
 
 </div>
-{(valueMenu.isOpen===true||valueMenu.isColor===true)&&<div className="w-[400px] 
+{(valueMenu.isOpen===true||valueMenu.isColor===true||valueMenu.isPosition===true)&&<div className="w-[400px] 
  bg-[#252627] relative flex flex-col ">
     
     
+    {/*ceci permet de fermer le menu*/}
    {valueMenu.isOpen&& <button  onClick={()=>{
         dispatch(closeMenu())
+        
     }}
     className="absolute  text-slate-70   top-1/2
      right-0  bg-white p-4 ">
@@ -135,6 +138,13 @@ className={`flex flex-col items-center gap-2 p-2 py-4   ${valueMenu.typeMenu==="
        <div className="bg-transparent grid grid-cols-6 gap-2">
        {UnifiedcOLOR}
        </div>
+    
+        </div>}
+
+        {(valueMenu.isPosition&&ValueSelected.length>3)&&
+    <div className="absolute  bg-slate-50 w-full  p-4
+    h-full z-40 flex flex-col   ">
+           <PositionComponent/>
     
         </div>}
 

@@ -3,7 +3,7 @@ import React, { useRef, useState,Ref, forwardRef, LegacyRef, MutableRefObject, u
 import { Layer, Stage } from 'react-konva';
 import { useAppDispatch } from '@/hooks';
 import {unselectId} from "../../features/canva/selectedCanva-slice"
-import {closeColorMenu} from "../../features/canva/menu-slice"
+import {closeColorMenu, closeMenu, closePositionMenu} from "../../features/canva/menu-slice"
 import TextEditorComponent from './TextEditorComponent';
 import CanvaRichTextImage from './CanvaRichTextImage';
 import { StageConfig } from 'konva/lib/Stage';
@@ -36,7 +36,9 @@ function updateTextVal(e:string)
 
 
   return (
-    <div 
+    <div  onClick={(e)=>{
+      
+     }}
      className='flex flex-col  h-full 
      w-full items-center justify-center relative'>
 
@@ -45,9 +47,12 @@ function updateTextVal(e:string)
 
    <Stage ref={refOfStage}
      onClick={(e)=>{
-  
+  e.cancelBubble=true
     dispatch(unselectId())
     dispatch(closeColorMenu())
+    dispatch(closePositionMenu())
+   
+   
    }}
     scale={{x:1,y:1}}
     className='bg-slate-50'

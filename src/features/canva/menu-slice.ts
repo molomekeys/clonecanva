@@ -4,8 +4,10 @@ interface InitialStateMenu{
     isOpen:boolean
     typeMenu : string
     isColor:boolean
+    isPosition:boolean
 }
 const iniTialMenu:InitialStateMenu={
+    isPosition:false,
     isOpen:false,
     typeMenu:"",isColor:false
 }
@@ -22,9 +24,15 @@ const menuSlice=createSlice({
         },
         closeColorMenu:(state)=>{
             return {...state,isColor:false,}
+        },
+        openPositionMenu:(state)=>{
+            return {...state,isPosition:!state.isPosition}
+        },
+        closePositionMenu:(state)=>{
+            return {...state,isPosition:false}
         }
 
     }
 })
 export  default menuSlice.reducer
-export const {closeMenu,openMenu,closeColorMenu,openColorMenu} = menuSlice.actions
+export const {openPositionMenu,closePositionMenu,closeMenu,openMenu,closeColorMenu,openColorMenu} = menuSlice.actions

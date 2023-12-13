@@ -5,7 +5,7 @@ import { BlockPicker,GithubPicker,TwitterPicker } from 'react-color';
 import { MdOutlineFormatColorText } from "react-icons/md";
 
 import {increaseIndex,decreaseIndex,changeColor,changeTextNormal,changeTextBold,decreaseTextSize,increaseTextSize,specifiqueTextSize} from "../../features/canva/rectangle-slice"
-import { openColorMenu } from "@/features/canva/menu-slice";
+import { openColorMenu, openPositionMenu } from "@/features/canva/menu-slice";
 import { GrUndo,GrRedo } from "react-icons/gr";
 import { goBackIndex,goNextIndex,putOnBottom, putOnCenterHorizontal, putOnCenterVertical, putOnLeft, putOnRight, putOnTop } from "@/features/canva/do-unredo-canva";
 import { FaFileDownload } from "react-icons/fa";
@@ -19,6 +19,8 @@ const ModifySelectedComponent = ({savePdf}:ModifySelected) => {
     const selecTedId=useAppSelector(state=>state.selectedCanva)
   const allValues=useAppSelector(state=>state.rectangle)
   const indexValMo=useAppSelector(s=>s.doUnredo)
+  const isOpenPosition=useAppSelector(e=>e.menuSelected.isPosition)
+
 const dispatch=useDispatch()
   console.log(allValues)
   console.log(selecTedId)
@@ -32,7 +34,7 @@ const dispatch=useDispatch()
   console.log(filteredId)
   return (
     <div className=" relative justify-between
-      bg-slate-50 h-10 px-4  w-full  gap-2 
+      bg-slate-50 h-12 px-4  w-full  gap-2 
        z-20 flex text-slate-800">
        
        <div className="flex gap-4 items-center  max-w-fit
@@ -99,51 +101,21 @@ const dispatch=useDispatch()
         <MdOutlineFormatColorText size={20}/>
             </div>
 
-            <div className="" onClick={()=>{
+       
+   
+       
+            <div className={`${isOpenPosition? "bg-slate-200 font-semibold" : ""} p-1 px-2 rounded-lg`} onClick={()=>{
               console.log("coucou")
-            dispatch(putOnBottom(selecTedId))
+            dispatch(openPositionMenu())
         }}>
-       <p>put on bottom</p>
+       <p>Position</p>
        
             </div>
-            <div className="" onClick={()=>{
-              console.log("coucou")
-            dispatch(putOnRight(selecTedId))
-        }}>
-       <p>put on right</p>
-       
-            </div>
-            <div className="" onClick={()=>{
-              console.log("coucou")
-            dispatch(putOnTop(selecTedId))
-        }}>
-       <p>put on top</p>
-       
-            </div>
-            <div className="" onClick={()=>{
-              console.log("coucou")
-            dispatch(putOnLeft(selecTedId))
-        }}>
-       <p>put on left</p>
-       
-            </div>
-            <div className="" onClick={()=>{
-              console.log("coucou")
-            dispatch(putOnCenterVertical(selecTedId))
-        }}>
-       <p>put on center vertical</p>
-       
-            </div>
-            <div className="" onClick={()=>{
-              console.log("coucou")
-            dispatch(putOnCenterHorizontal(selecTedId))
-        }}>
-       <p>put on center horizontal</p>
-       
-            </div>
-       
-        </div>}
-        <div className="flex  ">
+
+        </div>
+        
+        }
+        <div className="flex  mx-2 ">
 
         <button  
          >
