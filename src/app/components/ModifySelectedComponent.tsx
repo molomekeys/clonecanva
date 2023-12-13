@@ -20,7 +20,7 @@ const ModifySelectedComponent = ({savePdf}:ModifySelected) => {
   const allValues=useAppSelector(state=>state.rectangle)
   const indexValMo=useAppSelector(s=>s.doUnredo)
   const isOpenPosition=useAppSelector(e=>e.menuSelected.isPosition)
-
+const isColorMenu=useAppSelector(s=>s.menuSelected.typeMenu)
 const dispatch=useDispatch()
   console.log(allValues)
   console.log(selecTedId)
@@ -95,10 +95,10 @@ const dispatch=useDispatch()
         
         </div>
         }
-        <div className="" onClick={()=>{
+        <div className={`${isColorMenu==="color"? "bg-slate-200 hover:bg-slate-100" : ""}  cursor-pointer hover:bg-slate-300 p-2`} onClick={()=>{
             dispatch(openColorMenu())
         }}>
-        <MdOutlineFormatColorText size={20}/>
+        <MdOutlineFormatColorText className=" cursor-pointer " size={20}/>
             </div>
 
        

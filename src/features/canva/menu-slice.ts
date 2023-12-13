@@ -20,16 +20,23 @@ const menuSlice=createSlice({
             return {...state,isOpen:false,typeMenu:""}
         },
         openColorMenu:(state)=>{
-            return {...state,isColor:!state.isColor}
+            if(state.isColor===false)
+            {
+            return {...state,isColor:!state.isColor,typeMenu:"color"}
+        }
+        else {
+            return {...state,isColor:!state.isColor,typeMenu:""}
+
+        }
         },
         closeColorMenu:(state)=>{
-            return {...state,isColor:false,}
+            return {...state,isColor:false,typeMenu:""}
         },
         openPositionMenu:(state)=>{
-            return {...state,isPosition:!state.isPosition}
+            return {...state,isPosition:!state.isPosition,typeMenu:"position"}
         },
         closePositionMenu:(state)=>{
-            return {...state,isPosition:false}
+            return {...state,isPosition:false,typeMenu:""}
         }
 
     }

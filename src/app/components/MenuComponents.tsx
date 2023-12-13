@@ -81,26 +81,26 @@ const MenuComponents = () => {
 
          <div   onClick={()=>{
             dispatch(openMenu("photos"))}}
-            className={`flex flex-col items-center  p-2 py-4 ${valueMenu.typeMenu==="photos"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
+            className={`flex flex-col items-center cursor-pointer p-2 py-4 ${valueMenu.typeMenu==="photos"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
 >
 <SlPicture id="galeryShape"  size={20}/>
-<label htmlFor="galeryShape" className="text-xs ">{`Photos`}</label>
+<label htmlFor="galeryShape" className="text-xs  cursor-pointer">{`Photos`}</label>
 </div>
      
      <div   onClick={()=>{
             dispatch(openMenu("element"))}}
-className={`flex flex-col items-center gap-2 p-2 py-4   ${valueMenu.typeMenu==="element"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}>
+className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer  ${valueMenu.typeMenu==="element"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}>
 <LuShapes id="luShape"  size={20}/>
-<label htmlFor="luShape" className="text-xs ">{`Élements`}</label>
+<label htmlFor="luShape" className="text-xs  cursor-pointer ">{`Élements`}</label>
 </div>
 
 
 <div   onClick={()=>{
             dispatch(openMenu("text"))}}
-            className={`flex flex-col items-center gap-2 p-2 py-4  ${valueMenu.typeMenu==="text"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
+            className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer ${valueMenu.typeMenu==="text"? "bg-[#252627] text-slate-200 font-semibold" : "bg-[#18191A] text-slate-500"} justify-center w-full`}
 >
-<RiText id="riText"  size={20}/>
-<label htmlFor="riText" className="text-xs ">Text</label>
+<RiText id="riText" className=" cursor-pointer" size={20}/>
+<label htmlFor="riText" className="text-xs  cursor-pointer ">Text</label>
 </div>
 
 
@@ -141,7 +141,7 @@ className={`flex flex-col items-center gap-2 p-2 py-4   ${valueMenu.typeMenu==="
     
         </div>}
 
-        {(valueMenu.isPosition&&ValueSelected.length>3)&&
+        {(valueMenu.isPosition&&ValueSelected.length>3&&valueMenu.typeMenu=="position")&&
     <div className="absolute  bg-slate-50 w-full  p-4
     h-full z-40 flex flex-col   ">
            <PositionComponent/>
