@@ -104,7 +104,7 @@ const dispatch=useDispatch()
        
    
        
-            <div className={`${isOpenPosition? "bg-slate-200 font-semibold" : ""} p-1 px-2 rounded-lg`} onClick={()=>{
+            <div className={`${isOpenPosition? "bg-slate-200 font-semibold hover:bg-slate-100" : "hover:bg-slate-200 hover:font-bold "} text-sm font-semibold p-2 px-2 rounded-lg cursor-pointer`} onClick={()=>{
               console.log("coucou")
             dispatch(openPositionMenu())
         }}>
