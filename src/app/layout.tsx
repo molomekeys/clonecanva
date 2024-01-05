@@ -1,4 +1,5 @@
 
+import ReactQueryProvider from '@/features/ReactQueryProvider'
 import { ReduxProvider } from '@/features/ReduxProvider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -20,9 +21,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    
     <html lang="en">
+      <ReduxProvider>
+        <ReactQueryProvider>
+
+      
       <body className="flex flex-col">
-        <ReduxProvider>
+       
         <nav className='w-full bg-gradient-to-r to-[#3195b9] via-[#2ba8a6] from-[#16879ba7] h-12'>
             
             </nav>
@@ -38,8 +44,10 @@ export default function RootLayout({
           </section>
        
         </section>
-        </ReduxProvider>
+       
         </body>
+        </ReactQueryProvider>
+      </ReduxProvider>
     </html>
   )
 }

@@ -35,7 +35,8 @@ const CircleComponent = ({id,isSelect,onSelect,x,y,color,radius=30}:CircleProps)
   
   return (
    <>
-    <Circle  onDblTap={onSelect}  onDragEnd={(e)=>{
+    <Circle  name="circle"
+     onDblTap={onSelect}  onDragEnd={(e)=>{
      
      console.log(id)
      console.log(e.target.x())

@@ -20,7 +20,6 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
     const dispatch=useAppDispatch()
     const trRef=useRef<Konva.Transformer>(null)
     const rectRef=useRef(null)
-    const actualState=useAppSelector(state=>state.rectangle)
     console.log(id)
     useEffect(()=>{
 
@@ -42,7 +41,10 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
    <>
     <Rect 
      onDblTap={onSelect} onDragStart={(e)=>{
-        console.log('wesh')
+      let stage =e.currentTarget.getStage()
+      const current=e.currentTarget
+
+  
          }}
     ref={rectRef} x={x} y={y} onDragEnd={(e)=>{
      
@@ -53,7 +55,7 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
      
 
     }}
-     onDblClick={onSelect} width={width} height={heigth} fill={color} draggable/>
+     onDblClick={onSelect} name="rectangle" width={width} height={heigth} fill={color} draggable/>
 
 {isSelect&&  rectRef.current&&  <Transformer ref={trRef}/>}
 

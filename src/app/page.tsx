@@ -34,14 +34,17 @@ const LineArcComponent= dynamic(() => import('./components/shapeComponent/LineAr
 
 
 
-
+import { QueryClient,QueryClientProvider } from 'react-query';
 
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
 import Konva from 'konva';
 import { Stage } from 'react-konva';
+import ImageComponent from './components/shapeComponent/ImageComponent';
 export default function Home() {
+  const queryClient = new QueryClient()
+
   const dispatch=useAppDispatch()
  const idSelected=useAppSelector((state)=>state.selectedCanva)
   const allRectangle=useAppSelector((state)=>state.rectangle)
@@ -81,6 +84,16 @@ export default function Home() {
     
     />
     break;
+    case "image" :
+    return <ImageComponent  
+     id={e.id} url={e.url? e.url : ""}
+    heigth={e.height} width={e.width}
+     color={e.color} x={e.x} 
+    y={e.y} isSelect={e.id===idSelected}
+    onSelect={()=>dispatch(setSelectedId(e.id))} 
+     key={i}
+    
+    />
     case "circle" :
     return <CircleComponent  id={e.id}
       radius={e.radius} color={e.color} x={e.x}
@@ -114,15 +127,13 @@ export default function Home() {
   })
 
 
-  const infoOfSelected=allRectangle.filter((e)=>{
-    return e?.id===idSelected
-  })
-
-  console.log(allTransComponent)
+console.log(selectedCnva.state)
   const refTestMomo=useRef<Konva.Stage>(null)
 
   //function qui permet de sauvegarde le pdf
   function handleSavingPdf(){
+    const momo =refTestMomo.current?.toDataURL()
+    console.log(momo)
     console.log(refTestMomo)
     if(refTestMomo.current!=null)
     {
@@ -131,7 +142,7 @@ export default function Home() {
       const momo =new jsPDF('p',"px",[refTestMomo.current.width(),
         refTestMomo.current.height()])
       momo.addImage(
-        refTestMomo.current.toDataURL({ pixelRatio: 2 }),
+        refTestMomo.current.toDataURL({ pixelRatio: 2 }),".jpeg",
         0,
         0,
         refTestMomo.current.width(),
@@ -141,7 +152,8 @@ export default function Home() {
     }
   }
   return (
-    <Provider store={store}>
+    
+   
     <main className="flex  w-full bg-slate-200
      flex-col items-center justify-between gap-4 ">
       
@@ -167,6 +179,7 @@ export default function Home() {
       </CanvaCom>
     </section>
     </main>
-    </Provider>
+   
+ 
   )
 }

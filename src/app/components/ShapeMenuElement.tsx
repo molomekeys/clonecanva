@@ -3,6 +3,9 @@ import { addArcArrow,addTriangle, addCircle,addRectangle } from "@/features/canv
 import { saveNewState } from "@/features/canva/do-unredo-canva"
 import { useDispatch } from "react-redux"
 import {v4} from "uuid"
+import { MdCircle, MdLineAxis, MdLineStyle, MdRectangle } from "react-icons/md";
+import { WiDirectionRight} from "react-icons/wi";
+
 const ShapeMenuElement = () => {
     const dispatch=useDispatch()
     const valueState=useAppSelector(state=>state.rectangle)
@@ -11,25 +14,25 @@ const ShapeMenuElement = () => {
   return (
    <section className="flex flex-col text-slate-50">
 
-<div className="grid grid-cols-3 gap-20">
+<div className="grid grid-cols-3 gap-10 px-10">
     <button
     onClick={async()=>{
       
-        dispatch(saveNewState({state:valueState,newInfo:{id:v4(),color:"#05a206",height:50,width:50,x:400,y:400,typeOfShape:"rectangle"}}))
+        dispatch(saveNewState({newInfo:{id:v4(),color:"#05a206",height:50,width:50,x:400,y:400,typeOfShape:"rectangle"}}))
 
 
     }}
-    >Add a rectangle</button>
+    ><MdRectangle size={100}/></button>
     <button  onClick={async()=>{
       
-       dispatch(saveNewState({state:valueState,newInfo:{id:v4(),color:"#05a206",
+       dispatch(saveNewState({newInfo:{id:v4(),color:"#05a206",
        height:50,width:50,x:400,y:400,typeOfShape:"circle",radius:30}}))
-    }}
-    >Add a circle </button>
+    }}>
+   <MdCircle size={100}/> </button>
      <button  onClick={async ()=>{
       
 
-      dispatch(saveNewState({state:valueState,newInfo:
+      dispatch(saveNewState({newInfo:
         {id:v4(),text:"hello bro ",color:"#000",height:20,width:20
         ,x:100,y:200,typeOfShape:"arrow",fontSize:30,}
     
@@ -39,7 +42,7 @@ const ShapeMenuElement = () => {
 
 
 
-    >Add Line </button>
+    > <WiDirectionRight size={150}/> </button>
 
 {/* <button  onClick={async()=>{
         await dispatch(addTriangle())

@@ -13,7 +13,7 @@ interface RectangleSlice{
     fontSize?:number
     radius?:number
     id:string
-    
+    url?:string
     fontFamily?:string
     text?:string
     }
@@ -24,7 +24,7 @@ interface RectangleSlice{
         index:number,state:RectangleSlice[][]
     }
     interface PayloadActionSpec{
-        state:RectangleSlice[],newInfo:RectangleSlice
+      newInfo:RectangleSlice
     }
 
     interface ChangeColor{
@@ -42,7 +42,7 @@ interface RectangleSlice{
     const iniTialState:InitialState={stageInfo:{
         width:500,heigth:600
     },index:0,state:[[{ color:"#b2a102",x:300,y:200,height:50,
-    width:50,typeOfShape:"text",id:v4(),text:"hello bro",fontSize:20}]]}
+    width:50,typeOfShape:"rectangle",id:v4()}]]}
 
     
     const doUnRedoCanvaSlice=createSlice({name:"BigState",

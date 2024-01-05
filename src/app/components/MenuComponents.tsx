@@ -13,6 +13,7 @@ import { CirclePicker, GithubPicker, SketchPicker, TwitterPicker } from "react-c
 import { changeColor } from "@/features/canva/do-unredo-canva";
 import { FaSquare } from "react-icons/fa";
 import PositionComponent from "./menu/PositionComponent";
+import ImageMenuElement from "./ImageMenuElement";
 
 const MenuComponents = () => {
     const ValueSelected=useAppSelector(state=>state.selectedCanva)
@@ -32,11 +33,11 @@ const MenuComponents = () => {
   }
     
   })
-  const merouaneArrayColor=indexOfState.state[indexOfState.index].map((e)=>{
+  const merouaneArrayColor=indexOfState.state[indexOfState.index]?.map((e)=>{
     return e.color
   })
   const formatedArrayColor=new Set(merouaneArrayColor)
-  const formatedMomo=Array.from(formatedArrayColor).map((e,i)=>{
+  const formatedMomo=Array.from(formatedArrayColor)?.map((e,i)=>{
    return <button  onClick={(momo)=>{
       dispatch(changeColor({color:e,id:selecTedId}))
     }}>
@@ -115,14 +116,16 @@ className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer  ${valueMe
         dispatch(closeMenu())
         
     }}
-    className="absolute  text-slate-70   top-1/2
-     right-0  bg-white p-4 ">
-        <IoIosArrowBack size={20}/>
+    className="absolute  text-slate-70   top-1/2 flex items-center justify-center
+     right-0  bg-white rounded-t-lg rounded-b-lg rounded-r-full    
+      text-slate-800 p-1 pt-10 pr-1 pb-10 translate-x-7 z-40 ">
+        <IoIosArrowBack className="" size={20}/>
     </button>}
 
 
     {(valueMenu.typeMenu==="element"&&valueMenu.isOpen===true)&&<ShapeMenuElement/>}
     {(valueMenu.typeMenu==="text"&&valueMenu.isOpen===true)&&<TextMenuElement/>}
+    {(valueMenu.typeMenu==="photos"&&valueMenu.isOpen===true)&&<ImageMenuElement/>}
 
     
     {(valueMenu.isColor&&ValueSelected.length>3)&&
