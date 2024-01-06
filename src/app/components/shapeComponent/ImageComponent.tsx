@@ -1,3 +1,4 @@
+"use client"
 import { Image,Transformer } from "react-konva"
 import useImage from "use-image"
 import {useRef,useEffect} from "react"

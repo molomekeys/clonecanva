@@ -34,16 +34,15 @@ const LineArcComponent= dynamic(() => import('./components/shapeComponent/LineAr
 
 
 
-import { QueryClient,QueryClientProvider } from 'react-query';
 
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
 import Konva from 'konva';
-import { Stage } from 'react-konva';
+
 import ImageComponent from './components/shapeComponent/ImageComponent';
 export default function Home() {
-  const queryClient = new QueryClient()
+  
 
   const dispatch=useAppDispatch()
  const idSelected=useAppSelector((state)=>state.selectedCanva)
