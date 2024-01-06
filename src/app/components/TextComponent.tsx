@@ -54,7 +54,7 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
             x: stage?.container().offsetLeft + textPosition?.absolutePosition().x,
             y: stage.container().offsetTop + textPosition?.absolutePosition().y,
             width:textPosition.width()-textPosition.padding()*2,
-            height:textPosition.height()-textPosition.padding()*2+10
+            height:textPosition.height()+textPosition.padding()*2+10
         }
         dispatch(openInputMenu({
             ...merouaneTest
