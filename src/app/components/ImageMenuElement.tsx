@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 import {saveNewState} from "../../features/canva/do-unredo-canva"
