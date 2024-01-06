@@ -34,14 +34,15 @@ const LineArcComponent= dynamic(() => import('./components/shapeComponent/LineAr
 
 
 
-
+const ImageComponent=dynamic(()=>import("./components/shapeComponent/ImageComponent"),{
+  ssr:false
+})
 
 import { useAppSelector } from '@/hooks';
 import {setSelectedId} from "../features/canva/selectedCanva-slice" 
 import ModifySelectedComponent from './components/ModifySelectedComponent';
 import Konva from 'konva';
 
-import ImageComponent from './components/shapeComponent/ImageComponent';
 export default function Home() {
   
 
