@@ -19,9 +19,10 @@ const CircleComponent = dynamic(() => import('./components/shapeComponent/Circle
   ssr: false,
 });
 
-const CanvaCom = dynamic(() => import('./components/CanvaCom'), {
-  ssr: false,
-});
+const CanvaComponentNext=dynamic(()=>import("../canvaComponent/CanvaComponentNext"),{
+  ssr:false
+})
+
 
 const TriangleComponent = dynamic(() => import('./components/shapeComponent/TriangleComponent'), {
   ssr: false,
@@ -173,9 +174,10 @@ console.log(selectedCnva.state)
     <div>
      
       </div>
- <CanvaCom refOfStage={refTestMomo}  >
+ 
+      <CanvaComponentNext refOfStage={refTestMomo} >
       {allTransComponent}
-      </CanvaCom>
+      </CanvaComponentNext>
     </section>
     </main>
    

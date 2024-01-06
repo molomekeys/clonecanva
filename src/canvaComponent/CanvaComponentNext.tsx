@@ -2,12 +2,13 @@
 import React, { useRef, useState,Ref, forwardRef, LegacyRef, MutableRefObject, useEffect } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useAppDispatch } from '@/hooks';
-import {unselectId} from "../../features/canva/selectedCanva-slice"
-import {closeColorMenu, closeMenu, closePositionMenu} from "../../features/canva/menu-slice"
-import TextEditorComponent from './TextEditorComponent';
-import CanvaRichTextImage from './CanvaRichTextImage';
-import jsPDF from 'jspdf';
+import {unselectId} from "../features/canva/selectedCanva-slice"
+import {closeColorMenu, closeMenu, closePositionMenu} from "../features/canva/menu-slice"
+
 import  Konva from "konva"
+
+import CanvaRichTextImage from '../app/components/CanvaRichTextImage';
+import jsPDF from 'jspdf';
 type GuideInfo = {
   lineGuide: number;
   diff: number;
@@ -189,7 +190,7 @@ function drawGuides(guides:ReturnType<typeof getGuides>,layer:Konva.Layer) {
 
 
 
-const CanvaCom = ({children,refOfStage}:Canva) => {
+const CanvaComponentsext = ({children,refOfStage}:Canva) => {
     const dispatch=useAppDispatch()
 
     
@@ -321,4 +322,4 @@ function updateTextVal(e:string)
    </div>
   )
 }
-export default CanvaCom
+export default CanvaComponentsext
