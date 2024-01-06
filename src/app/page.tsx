@@ -76,7 +76,7 @@ export default function Home() {
     />
     break;
     case "text" :
-    return <TextComponent  text={e.text}
+    return <TextComponent  text={e.text} fontFamily={e.fontFamily}
     heigth={e.height} width={e.width}
      color={e.color} x={e.x} fontStyle={e.fontFamily}
     y={e.y} isSelect={e.id===idSelected}

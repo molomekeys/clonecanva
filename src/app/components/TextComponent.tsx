@@ -1,4 +1,5 @@
 "use client"
+import { fontFamily } from "html2canvas/dist/types/css/property-descriptors/font-family"
 import Konva from "konva"
 import { useEffect, useRef, useState } from "react"
 import {Rect,Transformer,Text} from "react-konva"
@@ -9,9 +10,10 @@ interface RectangleProps{
     fontSize?:number
     fontStyle?:string
     text?:string
+    fontFamily?:string
    
 }
-const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fontStyle="500"}:RectangleProps) => {
+const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fontStyle="500",fontFamily="popins"}:RectangleProps) => {
     
     const trRef=useRef<Konva.Transformer>(null)
     const textRef=useRef(null)
@@ -40,8 +42,8 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
     <Text   onClick={(e)=>{
         e.cancelBubble=true
         onSelect()
-    }}
- fontStyle={"mono"} listening
+    }} fontFamily={fontFamily}
+ listening
      ref={textRef} x={x} y={y}  text={text} fontSize={fontSize}
    
     
