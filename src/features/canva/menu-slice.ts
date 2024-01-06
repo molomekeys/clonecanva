@@ -5,19 +5,36 @@ interface InitialStateMenu{
     typeMenu : string
     isColor:boolean
     isPosition:boolean
+    x:number ,y:number
+    isInputOpen:boolean,width:number,height:number
 }
 const iniTialMenu:InitialStateMenu={
-    isPosition:false,
-    isOpen:false,
+    isPosition:false, x:0,y:0,width:0,height:0,
+    isOpen:false,isInputOpen:false,
     typeMenu:"",isColor:false
+}
+type openInputMenu={
+    x:number 
+    y:number
+    width:number 
+    height:number
 }
 const menuSlice=createSlice({
     name:"menu",
     initialState:iniTialMenu,reducers:{
+
+        
+        openInputMenu:(state,action:PayloadAction<openInputMenu>)=>{
+           
+            return {...state,isInputOpen:true,...action.payload}
+        },closeInputMenu:(state)=>{
+            return {...state,isInputOpen:false}
+        }
+        ,
         openMenu:(state,action:PayloadAction<string>)=>{
             return {...state,typeMenu:action.payload,isOpen:true}
         },closeMenu:(state)=>{
-            return {...state,isOpen:false,typeMenu:""}
+            return {...state,isOpen:false,typeMenu:"",isColor:false}
         },
         openColorMenu:(state)=>{
             if(state.isColor===false)
@@ -42,4 +59,4 @@ const menuSlice=createSlice({
     }
 })
 export  default menuSlice.reducer
-export const {openPositionMenu,closePositionMenu,closeMenu,openMenu,closeColorMenu,openColorMenu} = menuSlice.actions
+export const {closeInputMenu,openInputMenu,openPositionMenu,closePositionMenu,closeMenu,openMenu,closeColorMenu,openColorMenu} = menuSlice.actions

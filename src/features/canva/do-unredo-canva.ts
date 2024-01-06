@@ -36,7 +36,10 @@ interface RectangleSlice{
     interface ChangeSize{
         id:string ,x:number,y:number,width:number,height:number
     }
-
+    interface changeText{
+        id:string ,text:string 
+        
+    }
     interface changePosition{
         id:string ,x:number,y:number
     }
@@ -80,6 +83,51 @@ interface RectangleSlice{
 
 
                 return {stageInfo:state.stageInfo,index:nonoIndex,state:[...state.state,newArrayBro]}
+            }
+
+            },changeText:(state,action:PayloadAction<changeText>)=>{
+                const {id,text}=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            
+                        
+                                return {...e,text:text}
+                            
+                            
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        
+                            return {...e,text:text}
+                        
+
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
             }
 
             },
@@ -655,4 +703,4 @@ interface RectangleSlice{
         }
     })
     export  default doUnRedoCanvaSlice.reducer
-    export const {changeScale,putOnCenterHorizontal,putOnCenterVertical,putOnLeft,putOnRight,putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
+    export const {changeText,changeScale,putOnCenterHorizontal,putOnCenterVertical,putOnLeft,putOnRight,putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions

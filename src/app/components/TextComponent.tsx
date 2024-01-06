@@ -3,6 +3,8 @@ import { fontFamily } from "html2canvas/dist/types/css/property-descriptors/font
 import Konva from "konva"
 import { useEffect, useRef, useState } from "react"
 import {Rect,Transformer,Text} from "react-konva"
+import {openInputMenu} from "../../features/canva/menu-slice"
+import {useAppDispatch} from "../../hooks"
 interface RectangleProps{
     onSelect:()=>void 
     isSelect :boolean,color:string
@@ -16,7 +18,8 @@ interface RectangleProps{
 const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSize=14,fontStyle="500",fontFamily="popins"}:RectangleProps) => {
     
     const trRef=useRef<Konva.Transformer>(null)
-    const textRef=useRef(null)
+    const textRef=useRef<Konva.Text>(null)
+    const dispatch=useAppDispatch()
     useEffect(()=>{
 
         if(isSelect===true)
@@ -39,7 +42,26 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
   
  
  
-    <Text   onClick={(e)=>{
+    <Text    onDblClick={(e)=>{
+            let  textPosition=textRef.current
+            let stage =textPosition?.getStage()
+        if(textPosition&&stage)
+        {
+       
+  
+       trRef.current?.hide()
+        const merouaneTest={
+            x: stage?.container().offsetLeft + textPosition?.absolutePosition().x,
+            y: stage.container().offsetTop + textPosition?.absolutePosition().y,
+            width:textPosition.width()-textPosition.padding()*2,
+            height:textPosition.height()-textPosition.padding()*2+10
+        }
+        dispatch(openInputMenu({
+            ...merouaneTest
+        }))
+    }
+    }}
+    onClick={(e)=>{
         e.cancelBubble=true
         onSelect()
     }} fontFamily={fontFamily}

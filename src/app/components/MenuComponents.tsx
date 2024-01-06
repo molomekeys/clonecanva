@@ -114,6 +114,7 @@ className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer  ${valueMe
     {/*ceci permet de fermer le menu*/}
    {valueMenu.isOpen&& <button  onClick={()=>{
         dispatch(closeMenu())
+       
         
     }}
     className="absolute  text-slate-70   top-1/2 flex items-center justify-center

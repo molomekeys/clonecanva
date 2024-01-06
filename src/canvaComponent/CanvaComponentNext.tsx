@@ -1,14 +1,15 @@
 "use client"
 import React, { useRef, useState,Ref, forwardRef, LegacyRef, MutableRefObject, useEffect } from 'react';
 import { Layer, Stage } from 'react-konva';
-import { useAppDispatch } from '@/hooks';
+import { useAppDispatch ,useAppSelector} from '@/hooks';
 import {unselectId} from "../features/canva/selectedCanva-slice"
-import {closeColorMenu, closeMenu, closePositionMenu} from "../features/canva/menu-slice"
-
+import {closeColorMenu, closeInputMenu,closeMenu, closePositionMenu} from "../features/canva/menu-slice"
+import {motion} from "framer-motion"
 import  Konva from "konva"
 
 import CanvaRichTextImage from '../app/components/CanvaRichTextImage';
 import jsPDF from 'jspdf';
+import CustomInputComponent from '@/app/components/shapeComponent/CustomInputComponent';
 type GuideInfo = {
   lineGuide: number;
   diff: number;
@@ -205,7 +206,9 @@ function updateTextVal(e:string)
   setValueOfText(e)
 }
 
+const isOpenTextMenu=useAppSelector(b=>b.menuSelected.isInputOpen)
 
+const [isClicking,setIsClicking]=useState("")
   return (
     <div  onClick={(e)=>{
       
@@ -214,7 +217,7 @@ function updateTextVal(e:string)
      w-full items-center justify-center relative'>
 
 
-
+{isOpenTextMenu&&<CustomInputComponent  />}
 
    <Stage ref={refOfStage}
      onClick={(e)=>{
@@ -222,11 +225,11 @@ function updateTextVal(e:string)
     dispatch(unselectId())
     dispatch(closeColorMenu())
     dispatch(closePositionMenu())
-   
+   dispatch(closeInputMenu())
    
    }}
     scale={{x:1,y:1}}
-    className='bg-slate-50'
+    className='bg-white'
    height={600} width={500} >
     <Layer    onDragEnd={(e)=>{
       const stage=e.currentTarget.getLayer()
@@ -316,7 +319,6 @@ function updateTextVal(e:string)
    >
   
       {children}
-        <CanvaRichTextImage imageUrl={isImage}/>
     </Layer>
    </Stage>
    </div>
