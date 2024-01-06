@@ -19,7 +19,7 @@ interface RectangleSlice{
     }
     interface InitialState{
         stageInfo:{
-           width:number ,heigth:number
+           width:number ,height:number
         },
         index:number,state:RectangleSlice[][]
     }
@@ -33,14 +33,16 @@ interface RectangleSlice{
     interface ChangeOnDrag{
         id:string ,x:number,y:number
     }
-
+    interface ChangeSize{
+        id:string ,x:number,y:number,width:number,height:number
+    }
 
     interface changePosition{
         id:string ,x:number,y:number
     }
 
     const iniTialState:InitialState={stageInfo:{
-        width:500,heigth:600
+        width:500,height:600
     },index:0,state:[[{ color:"#b2a102",x:300,y:200,height:50,
     width:50,typeOfShape:"rectangle",id:v4()}]]}
 
@@ -80,7 +82,63 @@ interface RectangleSlice{
                 return {stageInfo:state.stageInfo,index:nonoIndex,state:[...state.state,newArrayBro]}
             }
 
-            },goBackIndex:(state)=>{
+            },
+            changeScale:(state,action:PayloadAction<ChangeSize>)=>{
+                const {height,id,width,x,y}=action.payload
+
+                const length=state.state.length
+
+                if(state.index<state.state.length-1)
+
+                {
+                    const momoTest=[...state.state]
+                        const newTest=momoTest[state.index]
+                   
+                    const momoBoum=momoTest[state.index].map((e)=>{
+                        if(e.id===id)
+                        {   
+                            if(e.typeOfShape==="circle")
+                            {
+                                return {...e,radius:height}
+
+                            }
+                            else {
+                                return {...e,height:height,width:width,x:x,y:y}
+                            }
+                            
+                        }
+                        else {
+                            return {...e}
+                        }
+                    })
+
+
+                    return {stageInfo:state.stageInfo,index:1,state:[newTest,momoBoum]}
+                }
+                else {
+                const newArrayTest=[...state.state]
+                const momoBoum=newArrayTest[length-1].map((e)=>{
+                    if(e.id===id)
+                    {
+                        if(e.typeOfShape==="circle")
+                        {
+                            return {...e,radius:height}
+
+                        }
+                        else {
+                            return {...e,height:height,width:width,x:x,y:y}
+                        }
+
+                    }
+                    else {
+                        return {...e}
+                    }
+                })
+                return {stageInfo:state.stageInfo,index:length,state:[...state.state,momoBoum]}
+            }
+
+            }
+            ,goBackIndex:(state)=>{
                 if(state.index===0)
                 {
                     return {stageInfo:state.stageInfo,index:0,state:state.state}
@@ -148,17 +206,17 @@ interface RectangleSlice{
                             {
                             let fontSize=e?.fontSize||0
                             return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-(fontSize))}
+                            y:(state.stageInfo.height-(fontSize))}
                         }
                         else if(e.typeOfShape=="circle")
                         {
                             return {...e,x:e.x,
-                                y:(state.stageInfo.heigth-(e.radius||0))}
+                                y:(state.stageInfo.height-(e.radius||0))}
                         }
                         else  {
                          
                             return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-e.height)}
+                            y:(state.stageInfo.height-e.height)}
                         }
                         }
                         else {
@@ -178,17 +236,17 @@ interface RectangleSlice{
                         {
                         let fontSize=e?.fontSize||0
                         return {...e,x:e.x,
-                        y:(state.stageInfo.heigth-fontSize)}
+                        y:(state.stageInfo.height-fontSize)}
                     }
                     else if(e.typeOfShape=="circle")
                     {
                         return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-(e.radius||0))}
+                            y:(state.stageInfo.height-(e.radius||0))}
                     }
                     else {
                         
                         return {...e,x:e.x,
-                        y:(state.stageInfo.heigth-e.height)}
+                        y:(state.stageInfo.height-e.height)}
                     }
                     }
                     else {
@@ -221,7 +279,7 @@ interface RectangleSlice{
                         else if(e.typeOfShape=="circle")
                         {
                             return {...e,x:e.x,
-                                y:(state.stageInfo.heigth-(e.radius||0))}
+                                y:(state.stageInfo.height-(e.radius||0))}
                         }
                         else  {
                          
@@ -420,17 +478,17 @@ interface RectangleSlice{
                             {
                             let fontSize=e?.fontSize||0
                             return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-e.height)/2}
+                            y:(state.stageInfo.height-e.height)/2}
                         }
                         else if(e.typeOfShape=="circle"&&e.radius)
                         {
                             return {...e,x:e.x,
-                                y:(state.stageInfo.heigth)/2}
+                                y:(state.stageInfo.height)/2}
                         }
                         else  {
                          
                             return {...e,x:e.x,
-                                y:(state.stageInfo.heigth-e.height)/2}
+                                y:(state.stageInfo.height-e.height)/2}
                         }
                         }
                         else {
@@ -450,17 +508,17 @@ interface RectangleSlice{
                         {
                         let fontSize=e?.fontSize||0
                         return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-e.height)/2}
+                            y:(state.stageInfo.height-e.height)/2}
                     }
                     else if(e.typeOfShape=="circle"&&e.radius)
                     {
                         return {...e,x:e.x,
-                            y:(state.stageInfo.heigth)/2}
+                            y:(state.stageInfo.height)/2}
                     }
                     else  {
                      
                         return {...e,x:e.x,
-                            y:(state.stageInfo.heigth-e.height)/2}
+                            y:(state.stageInfo.height-e.height)/2}
                     }
                     }
                     else {
@@ -597,4 +655,4 @@ interface RectangleSlice{
         }
     })
     export  default doUnRedoCanvaSlice.reducer
-    export const {putOnCenterHorizontal,putOnCenterVertical,putOnLeft,putOnRight,putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions
+    export const {changeScale,putOnCenterHorizontal,putOnCenterVertical,putOnLeft,putOnRight,putOnTop,putOnBottom,changeOnDrag,changeColor,goBackIndex,goNextIndex,saveNewState} = doUnRedoCanvaSlice.actions

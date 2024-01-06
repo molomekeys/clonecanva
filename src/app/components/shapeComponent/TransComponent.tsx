@@ -6,20 +6,20 @@ interface RectangleProps{
     onSelect:()=>void 
     isSelect :boolean,color:string
     id:string,
-    x:number,heigth:number,width:number,y:number
+    x:number,height:number,width:number,y:number
 
    
    
 }
 import { useAppDispatch, useAppSelector } from "@/hooks"
 import { saveDragPosition } from "@/features/canva/rectangle-slice"
-import { changeOnDrag, saveNewState } from "@/features/canva/do-unredo-canva"
+import { changeOnDrag, changeScale, saveNewState } from "@/features/canva/do-unredo-canva"
 
-const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleProps) => {
+const TransComponent = ({id,isSelect,onSelect,height,width,x,y,color}:RectangleProps) => {
     
     const dispatch=useAppDispatch()
     const trRef=useRef<Konva.Transformer>(null)
-    const rectRef=useRef(null)
+    const rectRef=useRef<Konva.Rect>(null)
     console.log(id)
     useEffect(()=>{
 
@@ -39,10 +39,31 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
   
   return (
    <>
-    <Rect 
+    <Rect  onTransformEnd={()=>{
+
+           // a caue 'dun probleme dans ma maniere d'ecrire height j'avais eu un probleme dans le scaling
+
+        const node = rectRef.current;
+        if(node)
+        {
+        const scaleX = node.scaleX();
+        const scaleY = node.scaleY();
+        node.scaleY(1)
+        node.scaleX(1)
+       console.log(scaleX,scaleY)
+          dispatch(changeScale({id:id,
+            width:  width * scaleX,
+            height:height * scaleY
+            ,x:node.x(),y:node.y()
+          }))
+        
+        }
+
+    }}
      onDblTap={onSelect} onDragStart={(e)=>{
       let stage =e.currentTarget.getStage()
       const current=e.currentTarget
+      
 
   
          }}
@@ -52,10 +73,11 @@ const TransComponent = ({id,isSelect,onSelect,heigth,width,x,y,color}:RectangleP
       console.log(e.target.x())
         dispatch(changeOnDrag({id,x:e.target.x(),y:e.target.y()}))
         // dispatch(saveNewState(actualState))
-     
+     // a caue 'dun probleme dans ma maniere d'ecrire height j'avais eu un probleme dans le scaling
 
     }}
-     onDblClick={onSelect} name="rectangle" width={width} height={heigth} fill={color} draggable/>
+     onDblClick={onSelect} name="rectangle" width={width} height={height} 
+     fill={color} draggable/>
 
 {isSelect&&  rectRef.current&&  <Transformer ref={trRef}/>}
 

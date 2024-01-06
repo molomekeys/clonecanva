@@ -67,7 +67,7 @@ export default function Home() {
     {
       case "rectangle":
     return <TransComponent  id={e.id}
-    heigth={e.height} width={e.width}
+    height={e.height} width={e.width}
      color={e.color} x={e.x}
     y={e.y} isSelect={e.id===idSelected}
      onSelect={()=>dispatch(setSelectedId(e.id))} 
@@ -88,7 +88,7 @@ export default function Home() {
     case "image" :
     return <ImageComponent  
      id={e.id} url={e.url? e.url : ""}
-    heigth={e.height} width={e.width}
+    height={e.height} width={e.width}
      color={e.color} x={e.x} 
     y={e.y} isSelect={e.id===idSelected}
     onSelect={()=>dispatch(setSelectedId(e.id))} 
