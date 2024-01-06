@@ -117,7 +117,7 @@ className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer  ${valueMe
         
     }}
     className="absolute  text-slate-70   top-1/2 flex items-center justify-center
-     right-0  bg-white rounded-t-lg rounded-b-lg rounded-r-full    
+     right-0  bg-white   rounded-e-lg rounded-tr-3xl   rounded-br-3xl 
       text-slate-800 p-1 pt-10 pr-1 pb-10 translate-x-7 z-40 ">
         <IoIosArrowBack className="" size={20}/>
     </button>}
