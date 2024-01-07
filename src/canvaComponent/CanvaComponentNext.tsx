@@ -209,6 +209,7 @@ function updateTextVal(e:string)
 const isOpenTextMenu=useAppSelector(b=>b.menuSelected.isInputOpen)
 const [isScale,setIsScaling]=useState(1)
 const [isClicking,setIsClicking]=useState("")
+const [isTextInput,setIsTextInput]=useState("")
   return (
     <div  onClick={(e)=>{
     
@@ -362,68 +363,29 @@ className='absolute z-20  inset-0 w-full h-full '>
    <div className='w-full h-full flex items-center justify-center 
     
     text-slate-800  relative    '>
-   <div className=' rounded-lg py-2 
+   <div className=' rounded-lg py-2  
     absolute self-center inset-y-12 shadow-lg shadow-white  
      bg-white divide-x-8 divide-slate-500 items-center justify-center
   flex'>
-    <button   className='  w-2/5 h-ful bg-blue-900 p-1  relative z-50'
-    onClick={()=>{
-      setIsScaling(e=>{
-        const value=e*1.2*100
-        const valueFlored=Math.floor(value)/100
-        
-        if(valueFlored<=5)
-        {
-        return valueFlored
-      }
-      else {
-        return 5
-      }
-      })
-      if(isOpenTextMenu)
-      {
-       dispatch(closeInputMenu())
-       refOfStage.current?.children[0].children.map((e)=>{
-         e.show()
-        })
-     
-      }
-    }}>+</button>
-  <input  type={"number"} onChange={(e)=>{
-    const numberVal=Number(e.target.value)
-    if(numberVal>5)
-    {
-      setIsScaling(5)
-
-    }
+   
+   <button  className='w-2/5 h-full hover:bg-blue-300'
+  onBlur={(e)=>{
  
-    else if(numberVal<-5){
-      setIsScaling(0)
-
-    }
-    else if(numberVal===0)
-    {
-      setIsScaling(0)
-    }
-    else {
-      setIsScaling(Number(e.target.value))
-    }
-    
   }}
-   className='w-full text-center outline-none  '
-  value={isScale<0?  " " : isScale==0? "0" : isScale}/>
-  <button  className='w-2/5 h-full hover:bg-blue-300'
   onClick={()=>{
     setIsScaling(e=>{
       const value=(e/1.1)*100
-        const valueFlored=Math.floor(value)/100
+        let valueFlored=Math.floor(value)/100
         if(valueFlored>=0.1)
         {
-        return valueFlored
+        
       }
       else {
-        return 0.1
+       valueFlored=0.1
       }
+      setIsTextInput(valueFlored.toString())
+
+      return valueFlored
     }
     )
     if(isOpenTextMenu)
@@ -436,6 +398,61 @@ className='absolute z-20  inset-0 w-full h-full '>
   }
   }}
   >-</button>
+    <input  type={"number"} onChange={(e)=>{
+    const numberVal=Number(e.target.value)
+    const length=e.target.value.length
+    console.log(e.target.value,length)
+    setIsTextInput(e.target.value)
+
+    const val=Math.floor(Number(e.target.value)*100)/100
+    if(val<=0)
+    {
+      setIsScaling(0.1)
+    }
+    else if(val==0)
+    {
+      setIsScaling(0.1)
+    }
+    else if(val>=5)
+    {
+      setIsScaling(5)
+      setIsTextInput("5")
+    }
+    else 
+    {
+      setIsScaling(val)
+    }
+  }}
+   className='w-full text-center outline-none  '
+  value={isTextInput}/>
+    <button   className='  w-2/5  bg-blue-900 p-1  relative z-50'
+    onClick={()=>{
+      setIsScaling(e=>{
+        const value=e*1.2*100
+      let valueFlored=Math.floor(value)/100
+        
+        if(valueFlored<=5)
+        {
+        
+      }
+      else {
+        valueFlored= 5
+      }
+      setIsTextInput(valueFlored.toString())
+      return valueFlored
+      })
+
+      if(isOpenTextMenu)
+      {
+       dispatch(closeInputMenu())
+       refOfStage.current?.children[0].children.map((e)=>{
+         e.show()
+        })
+     
+      }
+    }}>+</button>
+
+
   </div>
   </div>
    </div>
