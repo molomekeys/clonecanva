@@ -207,7 +207,7 @@ function updateTextVal(e:string)
 }
 
 const isOpenTextMenu=useAppSelector(b=>b.menuSelected.isInputOpen)
-
+const [isScale,setIsScaling]=useState(1)
 const [isClicking,setIsClicking]=useState("")
   return (
     <div  onClick={(e)=>{
@@ -215,9 +215,9 @@ const [isClicking,setIsClicking]=useState("")
     e.cancelable=true
    
      }}
-     className='flex flex-col  h-full 
+     className='flex flex-col  h-full  
      w-full items-center justify-center relative'>
-
+ 
 <div
 onClick={(e)=>{
 
@@ -241,9 +241,10 @@ onClick={(e)=>{
 className='absolute z-20  inset-0 w-full h-full '>
 
 </div>
-<div className='relative z-10  w-full h-full 
+<div className='relative z-10  w-full h-full
  flex items-center justify-center'>
-  <div className='w-fit h-fit relative z-30 bg-blue-800 flex flex-col'>
+
+  <div className='w-fit h-full relative z-30 bg-blue-800 flex flex-col '>
   {isOpenTextMenu&&<CustomInputComponent  />}
 
    <Stage ref={refOfStage}
@@ -265,7 +266,7 @@ className='absolute z-20  inset-0 w-full h-full '>
    dispatch(unselectId())
   }
      }}
-    scale={{x:1,y:1}}
+    scale={{x:isScale,y:isScale}}
     className='bg-white'
    height={600} width={500} >
     <Layer    onDragEnd={(e)=>{
@@ -358,6 +359,85 @@ className='absolute z-20  inset-0 w-full h-full '>
       {children}
     </Layer>
    </Stage>
+   <div className='w-full h-full flex items-center justify-center 
+    
+    text-slate-800  relative    '>
+   <div className=' rounded-lg py-2 
+    absolute self-center inset-y-12 shadow-lg shadow-white  
+     bg-white divide-x-8 divide-slate-500 items-center justify-center
+  flex'>
+    <button   className='  w-2/5 h-ful bg-blue-900 p-1  relative z-50'
+    onClick={()=>{
+      setIsScaling(e=>{
+        const value=e*1.2*100
+        const valueFlored=Math.floor(value)/100
+        
+        if(valueFlored<=5)
+        {
+        return valueFlored
+      }
+      else {
+        return 5
+      }
+      })
+      if(isOpenTextMenu)
+      {
+       dispatch(closeInputMenu())
+       refOfStage.current?.children[0].children.map((e)=>{
+         e.show()
+        })
+     
+      }
+    }}>+</button>
+  <input  type={"number"} onChange={(e)=>{
+    const numberVal=Number(e.target.value)
+    if(numberVal>5)
+    {
+      setIsScaling(5)
+
+    }
+ 
+    else if(numberVal<-5){
+      setIsScaling(0)
+
+    }
+    else if(numberVal===0)
+    {
+      setIsScaling(0)
+    }
+    else {
+      setIsScaling(Number(e.target.value))
+    }
+    
+  }}
+   className='w-full text-center outline-none  '
+  value={isScale<0?  " " : isScale==0? "0" : isScale}/>
+  <button  className='w-2/5 h-full hover:bg-blue-300'
+  onClick={()=>{
+    setIsScaling(e=>{
+      const value=(e/1.1)*100
+        const valueFlored=Math.floor(value)/100
+        if(valueFlored>=0.1)
+        {
+        return valueFlored
+      }
+      else {
+        return 0.1
+      }
+    }
+    )
+    if(isOpenTextMenu)
+  {
+   dispatch(closeInputMenu())
+   refOfStage.current?.children[0].children.map((e)=>{
+     e.show()
+    })
+ 
+  }
+  }}
+  >-</button>
+  </div>
+  </div>
    </div>
    </div>
    </div>

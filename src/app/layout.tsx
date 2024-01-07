@@ -29,7 +29,8 @@ export default function RootLayout({
       
       <body className="flex flex-col">
        
-        <nav className='w-full bg-gradient-to-r to-[#3195b9] via-[#2ba8a6] from-[#16879ba7] h-12'>
+        <nav className='w-full bg-gradient-to-r
+         to-[#3195b9] via-[#2ba8a6] from-[#16879ba7] h-12'>
             
             </nav>
          <section className='flex  w-screen h-screen relative'>
@@ -38,7 +39,7 @@ export default function RootLayout({
           <MenuComponents/>
           </section>
 
-          <section className='w-full bg-slate-200 flex flex-col'>
+          <section className='w-full bg-slate-200 flex flex-col h-full'>
             
           {children}
           </section>

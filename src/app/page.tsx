@@ -155,30 +155,21 @@ console.log(selectedCnva.state)
   return (
     
    
-    <main className="flex  w-full bg-slate-200
-     flex-col items-center justify-between gap-4 ">
+    <main className="flex  w-full bg-slate-200 h-full
+     flex-col items-center justify-between gap-4  ">
       
       
       <div className='w-full gap-8'>
         <ModifySelectedComponent  savePdf={handleSavingPdf}/>
       </div>
       <section className='w-full flex  h-full
-       bg-slate-200  items-center justify-center relative  '>
-      {filteredId[0]?.typeOfShape==="text"&& 
-           <div className='absolute bg-black z-40 '>
- 
-  <motion.textarea    value={filteredId[0].text&&filteredId[0].text}
-  
-  className=' bg-slate-300 text-slate-50 z-20 inset-0
-    '> </motion.textarea>
-    </div>}
-    <div>
-     
-      </div>
- 
+       items-center justify-center relative   '>
+
+<div className='h-full  w-full'>
       <CanvaComponentNext refOfStage={refTestMomo} >
       {allTransComponent}
       </CanvaComponentNext>
+      </div>
     </section>
     </main>
    
