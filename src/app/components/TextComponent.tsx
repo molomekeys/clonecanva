@@ -24,6 +24,8 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
 
         if(isSelect===true)
         {
+           
+
             if(trRef.current&&textRef.current)
             {
             trRef.current?.nodes([textRef.current])
@@ -42,23 +44,28 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
   
  
  
-    <Text    onDblClick={(e)=>{
+    <Text   
+     onDblClick={(e)=>{
             let  textPosition=textRef.current
             let stage =textPosition?.getStage()
         if(textPosition&&stage)
         {
        
   
-       trRef.current?.hide()
+ 
         const merouaneTest={
             x: stage?.container().offsetLeft + textPosition?.absolutePosition().x,
             y: stage.container().offsetTop + textPosition?.absolutePosition().y,
             width:textPosition.width()-textPosition.padding()*2,
             height:textPosition.height()+textPosition.padding()*2+10
         }
+        
         dispatch(openInputMenu({
             ...merouaneTest
         }))
+        trRef.current?.hide()
+        textRef?.current?.hide()
+        
     }
     }}
     onClick={(e)=>{
@@ -71,7 +78,9 @@ const TextComponent = ({text=" ",isSelect,onSelect,heigth,width,x,y,color,fontSi
     
      fill={color} draggable/>
 {isSelect&&  textRef.current&&  
-<Transformer flipEnabled={false} ref={trRef}/>}
+<Transformer
+    
+    flipEnabled={false} ref={trRef}/>}
 
 
 

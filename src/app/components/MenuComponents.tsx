@@ -74,7 +74,7 @@ const MenuComponents = () => {
   console.log(formatedArrayColor)
 
   return (
-    <section className="flex w-full h-full ">
+    <section className="flex w-full h-full relative z-30 ">
 <div className={`flex flex-col text-slate-50 bg-[#18191A]   gap-6 
    ${(valueMenu.isOpen===true||valueMenu.isColor===true||valueMenu.isPosition)? "w-fit " : "w-full "} `}>
    
@@ -119,7 +119,7 @@ className={`flex flex-col items-center gap-2 p-2 py-4  cursor-pointer  ${valueMe
     }}
     className="absolute  text-slate-70   top-1/2 flex items-center justify-center
      right-0  bg-white   rounded-e-lg rounded-tr-3xl   rounded-br-3xl 
-      text-slate-800 p-1 pt-10 pr-1 pb-10 translate-x-7 z-40 ">
+      text-slate-800 p-1 pt-10 pr-1 pb-10 translate-x-7 z-40  ">
         <IoIosArrowBack className="" size={20}/>
     </button>}
 

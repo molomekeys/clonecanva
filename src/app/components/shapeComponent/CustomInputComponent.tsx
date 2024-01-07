@@ -58,7 +58,7 @@ useEffect(()=>{
 
        }}
     style={{
-        transformOrigin:"left top",scrollbarWidth:"none",
+        transformOrigin:"left top",scrollbarWidth:"none",fontFamily:"Calibri",
         fontSize:findTheRight?.fontSize,color:findTheRight?.color,
        }}
      value={isInitialState} onChange={(e)=>{
@@ -67,7 +67,7 @@ useEffect(()=>{
        
     }}
     
-    className="absolute bg-white   whitespace-nowrap  
+    className="absolute bg-transparent   whitespace-nowrap  
       z-50 resize-none outline-none m-0 p-0 inset-0 overflow-hidden"
      placeholder="hello les amis"/>
 

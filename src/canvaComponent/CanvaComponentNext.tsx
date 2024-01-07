@@ -211,23 +211,60 @@ const isOpenTextMenu=useAppSelector(b=>b.menuSelected.isInputOpen)
 const [isClicking,setIsClicking]=useState("")
   return (
     <div  onClick={(e)=>{
-      
+    
+    e.cancelable=true
+   
      }}
      className='flex flex-col  h-full 
      w-full items-center justify-center relative'>
 
+<div
+onClick={(e)=>{
 
-{isOpenTextMenu&&<CustomInputComponent  />}
+  e.preventDefault()
+
+ if(isOpenTextMenu)
+ {
+  dispatch(closeInputMenu())
+  refOfStage.current?.children[0].children.map((e)=>{
+    e.show()
+   })
+
+ }
+ else {
+  dispatch(closeColorMenu())
+  dispatch(closePositionMenu())
+  dispatch(unselectId())
+ }
+  
+}}
+className='absolute z-20  inset-0 w-full h-full '>
+
+</div>
+<div className='relative z-10  w-full h-full 
+ flex items-center justify-center'>
+  <div className='w-fit h-fit relative z-30 bg-blue-800 flex flex-col'>
+  {isOpenTextMenu&&<CustomInputComponent  />}
 
    <Stage ref={refOfStage}
      onClick={(e)=>{
+      
   e.cancelBubble=true
-    dispatch(unselectId())
-    dispatch(closeColorMenu())
-    dispatch(closePositionMenu())
-   dispatch(closeInputMenu())
    
-   }}
+  if(isOpenTextMenu)
+  {
+   dispatch(closeInputMenu())
+   refOfStage.current?.children[0].children.map((e)=>{
+     e.show()
+    })
+ 
+  }
+  else {
+   dispatch(closeColorMenu())
+   dispatch(closePositionMenu())
+   dispatch(unselectId())
+  }
+     }}
     scale={{x:1,y:1}}
     className='bg-white'
    height={600} width={500} >
@@ -321,6 +358,8 @@ const [isClicking,setIsClicking]=useState("")
       {children}
     </Layer>
    </Stage>
+   </div>
+   </div>
    </div>
   )
 }
