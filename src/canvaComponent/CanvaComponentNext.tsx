@@ -209,7 +209,7 @@ function updateTextVal(e:string)
 const isOpenTextMenu=useAppSelector(b=>b.menuSelected.isInputOpen)
 const [isScale,setIsScaling]=useState(1)
 const [isClicking,setIsClicking]=useState("")
-const [isTextInput,setIsTextInput]=useState("")
+const [isTextInput,setIsTextInput]=useState("1")
   return (
     <div  onClick={(e)=>{
     

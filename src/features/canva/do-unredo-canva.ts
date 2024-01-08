@@ -46,8 +46,7 @@ interface RectangleSlice{
 
     const iniTialState:InitialState={stageInfo:{
         width:500,height:600
-    },index:0,state:[[{ color:"#b2a102",x:300,y:200,height:50,
-    width:50,typeOfShape:"rectangle",id:v4()}]]}
+    },index:0,state:[[]]}
 
     
     const doUnRedoCanvaSlice=createSlice({name:"BigState",
